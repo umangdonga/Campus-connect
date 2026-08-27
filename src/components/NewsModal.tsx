@@ -42,21 +42,21 @@ export const NewsModal: React.FC<NewsModalProps> = ({ isOpen, onClose, initialNe
     <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 md:p-6 animate-fade-in">
       <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="p-4 md:p-6 bg-gradient-to-r from-[#134F73] to-[#263D88] text-white flex items-center justify-between">
+        <div className="p-4 md:p-5 bg-[#2A2C5C] text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-white/10 rounded-2xl backdrop-blur-md">
-              <Newspaper className="w-6 h-6 text-[#53AADF]" />
+            <div className="p-2 bg-white/10 rounded-xl">
+              <Newspaper className="w-5 h-5 text-white" />
             </div>
             <div>
               <h2 className="text-base md:text-lg font-bold">Campus News & Circulars</h2>
-              <p className="text-xs text-sky-200">
+              <p className="text-xs text-slate-200">
                 Official notices, scholarships, event highlights & press releases
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
+            className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -68,9 +68,9 @@ export const NewsModal: React.FC<NewsModalProps> = ({ isOpen, onClose, initialNe
             <button
               key={tag}
               onClick={() => setActiveTag(tag)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 activeTag === tag
-                  ? 'bg-[#134F73] text-white shadow-sm'
+                  ? 'bg-[#2A2C5C] text-white shadow-xs'
                   : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
               }`}
             >
@@ -89,25 +89,25 @@ export const NewsModal: React.FC<NewsModalProps> = ({ isOpen, onClose, initialNe
                 <div
                   key={item.id}
                   onClick={() => setSelectedNews(item)}
-                  className={`p-3 rounded-2xl border transition-all cursor-pointer flex gap-3 ${
+                  className={`p-3 rounded-xl border transition-all cursor-pointer flex gap-3 ${
                     isSelected
-                      ? 'bg-sky-50 border-[#134F73] ring-1 ring-[#134F73] shadow-sm'
+                      ? 'bg-[#2A2C5C]/5 border-[#2A2C5C] ring-1 ring-[#2A2C5C] shadow-xs'
                       : 'bg-white border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-16 h-16 rounded-xl object-cover shrink-0"
+                    className="w-16 h-16 rounded-lg object-cover shrink-0"
                   />
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="text-[9px] font-bold text-[#134F73] bg-sky-100 px-2 py-0.5 rounded">
+                      <span className="text-[9px] font-semibold text-[#2A2C5C] bg-[#2A2C5C]/10 px-2 py-0.5 rounded">
                         {item.tag}
                       </span>
                       <span className="text-[10px] text-slate-400 font-medium">{item.timeAgo}</span>
                     </div>
-                    <h5 className="text-xs font-bold text-slate-900 line-clamp-2">{item.title}</h5>
+                    <h5 className="text-xs font-semibold text-slate-800 line-clamp-2">{item.title}</h5>
                   </div>
                 </div>
               );
@@ -116,7 +116,7 @@ export const NewsModal: React.FC<NewsModalProps> = ({ isOpen, onClose, initialNe
 
           {/* Right: Selected Article Reader */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="relative rounded-2xl overflow-hidden h-52 shadow-sm border border-slate-200">
+            <div className="relative rounded-xl overflow-hidden h-52 shadow-xs border border-slate-200">
               <img
                 src={selectedNews.image}
                 alt={selectedNews.title}
@@ -125,7 +125,7 @@ export const NewsModal: React.FC<NewsModalProps> = ({ isOpen, onClose, initialNe
               <div className="absolute top-3 right-3 flex items-center gap-1.5">
                 <button
                   onClick={() => toggleBookmark(selectedNews.id)}
-                  className="p-2 bg-black/50 hover:bg-black/70 backdrop-blur-md rounded-xl text-white transition-colors"
+                  className="p-2 bg-slate-900/60 hover:bg-slate-900/80 backdrop-blur-xs rounded-lg text-white transition-colors cursor-pointer"
                 >
                   <Bookmark
                     className={`w-4 h-4 ${
@@ -135,18 +135,12 @@ export const NewsModal: React.FC<NewsModalProps> = ({ isOpen, onClose, initialNe
                     }`}
                   />
                 </button>
-                <button
-                  onClick={() => alert(`Link copied: ${selectedNews.title}`)}
-                  className="p-2 bg-black/50 hover:bg-black/70 backdrop-blur-md rounded-xl text-white transition-colors"
-                >
-                  <Share2 className="w-4 h-4" />
-                </button>
               </div>
             </div>
 
             <div className="space-y-3">
               <div className="flex items-center justify-between text-xs text-slate-500">
-                <span className="bg-sky-50 text-[#134F73] font-bold px-2 py-0.5 rounded">
+                <span className="bg-[#2A2C5C]/10 text-[#2A2C5C] font-semibold px-2 py-0.5 rounded">
                   {selectedNews.category}
                 </span>
                 <span className="flex items-center gap-1">

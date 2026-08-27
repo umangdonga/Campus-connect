@@ -497,14 +497,14 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
   });
 
   return (
-    <div className="relative w-full h-[620px] md:h-[680px] bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 shadow-xl select-none">
+    <div className="relative w-full h-[520px] sm:h-[580px] md:h-[640px] bg-slate-950 rounded-2xl overflow-hidden border border-slate-200/80 shadow-xs select-none">
       {/* 3D Canvas Viewport */}
       <div ref={containerRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
       {/* Top Floating Control Bar */}
       <div className="absolute top-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
         {/* Search in map */}
-        <div className="pointer-events-auto flex items-center gap-2 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg border border-slate-100 w-full sm:w-auto max-w-sm">
+        <div className="pointer-events-auto flex items-center gap-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 w-full sm:w-auto max-w-sm">
           <Search className="w-4 h-4 text-slate-400 shrink-0" />
           <input
             id="map-search-input"
@@ -512,7 +512,7 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
             placeholder="Find building, lab, classroom..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full text-xs md:text-sm bg-transparent outline-none text-slate-800 placeholder:text-slate-400 font-medium"
+            className="w-full text-xs sm:text-sm bg-transparent outline-none text-slate-800 placeholder:text-slate-400"
           />
           {searchQuery && (
             <button
@@ -525,19 +525,19 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
         </div>
 
         {/* View Controls & Toggles */}
-        <div className="pointer-events-auto flex items-center gap-1.5 bg-white/95 backdrop-blur-md p-1.5 rounded-xl shadow-lg border border-slate-100">
+        <div className="pointer-events-auto flex items-center gap-1 bg-white/95 backdrop-blur-md p-1 rounded-xl border border-slate-200">
           <button
             id="btn-day-night-toggle"
             onClick={() => setNightMode(!nightMode)}
-            className={`p-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
+            className={`px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-all ${
               nightMode
-                ? 'bg-indigo-900 text-amber-300'
-                : 'bg-amber-100 text-amber-800'
+                ? 'bg-[#2A2C5C] text-white'
+                : 'bg-amber-50 text-amber-900'
             }`}
-            title="Toggle Day/Night Mode"
+            title="Toggle Day/Night View"
           >
-            {nightMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-            <span className="hidden sm:inline">{nightMode ? 'Night Glow' : 'Day View'}</span>
+            {nightMode ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
+            <span className="hidden sm:inline">{nightMode ? 'Night' : 'Day'}</span>
           </button>
 
           <button
@@ -547,7 +547,7 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
                 cameraRef.current.lookAt(0, 0, 0);
               }
             }}
-            className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
+            className="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
             title="Reset Campus View"
           >
             <Compass className="w-4 h-4" />
@@ -556,15 +556,15 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
       </div>
 
       {/* Categories Filter Pills */}
-      <div className="absolute top-16 left-3 right-3 flex items-center gap-1.5 overflow-x-auto pb-1 pointer-events-auto scrollbar-none">
+      <div className="absolute top-14 sm:top-16 left-3 right-3 flex items-center gap-1.5 overflow-x-auto pb-1 pointer-events-auto scrollbar-none">
         {['All', 'Academic', 'Library', 'Dining', 'Hostel', 'Sports', 'Administrative'].map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap shadow-md transition-all ${
+            className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
               activeCategory === cat
-                ? 'bg-[#134F73] text-white ring-2 ring-[#53AADF]'
-                : 'bg-white/90 text-slate-700 hover:bg-white'
+                ? 'bg-[#2A2C5C] text-white shadow-xs'
+                : 'bg-white/90 text-slate-700 hover:bg-white border border-slate-200/60'
             }`}
           >
             {cat}
@@ -574,28 +574,28 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
 
       {/* Hover Tooltip */}
       {hoveredBuilding && (
-        <div className="absolute bottom-40 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-xs px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur-md pointer-events-none flex items-center gap-2 border border-slate-700 animate-fade-in">
-          <span className="w-2 h-2 rounded-full bg-[#53AADF] animate-ping" />
-          <span className="font-semibold">{hoveredBuilding.name}</span>
-          <span className="text-slate-400">({hoveredBuilding.code})</span>
+        <div className="absolute bottom-36 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md pointer-events-none flex items-center gap-2 border border-slate-700">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <span className="font-medium">{hoveredBuilding.name}</span>
+          <span className="text-slate-400 text-[10px]">({hoveredBuilding.code})</span>
         </div>
       )}
 
       {/* Active Navigation Banner */}
       {isNavigating && (
-        <div className="absolute top-28 left-4 right-4 bg-emerald-600/95 text-white px-4 py-2.5 rounded-xl shadow-xl backdrop-blur-md flex items-center justify-between animate-bounce-short z-20">
-          <div className="flex items-center gap-2.5">
-            <div className="p-1.5 bg-emerald-500 rounded-lg">
-              <Navigation className="w-4 h-4 animate-spin text-white" />
+        <div className="absolute top-24 left-3 right-3 bg-[#2A2C5C] text-white px-3.5 py-2 rounded-xl backdrop-blur-md flex items-center justify-between z-20 shadow-xs">
+          <div className="flex items-center gap-2">
+            <div className="p-1 bg-white/10 rounded-lg">
+              <Navigation className="w-3.5 h-3.5 text-white" />
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-emerald-200">Active Live Navigation</p>
+              <p className="text-[10px] uppercase font-semibold text-slate-300">Live Campus Path</p>
               <p className="text-xs font-medium">{navRoute}</p>
             </div>
           </div>
           <button
             onClick={() => setIsNavigating(false)}
-            className="text-xs bg-emerald-700 hover:bg-emerald-800 px-2.5 py-1 rounded-lg transition-colors"
+            className="text-xs bg-white/20 hover:bg-white/30 px-2.5 py-1 rounded-lg transition-colors"
           >
             Stop
           </button>
@@ -604,19 +604,19 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
 
       {/* Bottom Selected Building Card */}
       {selectedBuilding && (
-        <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-2xl border border-slate-100 max-h-56 overflow-y-auto z-10">
+        <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md rounded-xl p-3.5 border border-slate-200 max-h-52 overflow-y-auto z-10">
           <div className="flex items-start justify-between gap-3">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-md"
+                className="w-9 h-9 rounded-lg flex items-center justify-center text-white font-bold text-xs"
                 style={{ backgroundColor: selectedBuilding.color }}
               >
                 {selectedBuilding.code}
               </div>
               <div>
-                <h4 className="text-sm md:text-base font-bold text-[#134F73] flex items-center gap-1.5">
+                <h4 className="text-sm font-bold text-[#2A2C5C] flex items-center gap-1.5">
                   {selectedBuilding.name}
-                  <span className="text-[10px] font-semibold bg-sky-100 text-[#134F73] px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-medium bg-[#2A2C5C]/5 text-[#2A2C5C] px-2 py-0.5 rounded-full">
                     {selectedBuilding.category}
                   </span>
                 </h4>
@@ -628,18 +628,18 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
               <button
                 id="btn-start-3d-nav"
                 onClick={() => handleStartNavigation(selectedBuilding)}
-                className="bg-[#134F73] hover:bg-[#0e3b56] text-white text-xs font-semibold px-3 py-2 rounded-xl flex items-center gap-1.5 transition-all shadow-md active:scale-95"
+                className="bg-[#2A2C5C] hover:bg-[#1E2045] text-white text-xs font-medium px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all active:scale-95 shadow-xs"
               >
-                <Navigation className="w-3.5 h-3.5 text-[#53AADF]" />
+                <Navigation className="w-3.5 h-3.5" />
                 <span>Navigate</span>
               </button>
             </div>
           </div>
 
           {/* Quick Classroom / Popular spots on this building */}
-          <div className="mt-3 pt-2.5 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+          <div className="mt-2.5 pt-2 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
             <div>
-              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
                 Floors & Rooms ({selectedBuilding.floors} Floors)
               </p>
               <div className="flex flex-wrap gap-1">
@@ -648,27 +648,27 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
                     <button
                       key={room.id}
                       onClick={() => onNavigateToRoom?.(room)}
-                      className={`px-2 py-1 rounded-lg text-[11px] font-medium border transition-colors flex items-center gap-1 ${
+                      className={`px-2 py-0.5 rounded-md text-[10px] font-medium border transition-colors flex items-center gap-1 ${
                         room.currentStatus === 'Available'
                           ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
                           : 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100'
                       }`}
                     >
                       <span>{room.roomNumber}</span>
-                      <span className="text-[9px] opacity-75">({room.type})</span>
+                      <span className="opacity-75 text-[9px]">({room.type})</span>
                     </button>
                   ))
                 ) : (
-                  <span className="text-slate-400 text-[11px]">Open facility / common zone</span>
+                  <span className="text-slate-400 text-[10px]">Open facility / common zone</span>
                 )}
               </div>
             </div>
 
             <div>
-              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
-                Key Highlights
+              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
+                Highlights
               </p>
-              <div className="flex flex-wrap gap-1 text-[11px] text-slate-600">
+              <div className="flex flex-wrap gap-1 text-[10px] text-slate-600">
                 {selectedBuilding.popularSpots.slice(0, 2).map((spot, i) => (
                   <span key={i} className="bg-slate-100 px-2 py-0.5 rounded-md">
                     • {spot}
@@ -681,8 +681,8 @@ export const CampusMap3D: React.FC<CampusMap3DProps> = ({
       )}
 
       {/* 3D Hint overlay */}
-      <div className="absolute bottom-2 left-4 text-[10px] text-white/60 pointer-events-none hidden md:block">
-        💡 Drag to rotate campus • Scroll to zoom • Click any building to inspect
+      <div className="absolute bottom-2 left-4 text-[10px] text-white/50 pointer-events-none hidden md:block">
+        Drag to rotate • Scroll to zoom • Click any building to focus
       </div>
     </div>
   );

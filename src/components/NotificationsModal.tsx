@@ -82,21 +82,21 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 md:p-6 animate-fade-in">
       <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden">
-        {/* Header - Matching iPhone 14 & 15 Pro - 19.jpg */}
+        {/* Header */}
         <div className="p-4 md:p-5 flex items-center justify-between border-b border-slate-100 bg-white">
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}
-              className="w-10 h-10 rounded-full bg-[#134F73] text-white flex items-center justify-center hover:bg-[#0e3b56] transition-colors shadow-sm"
+              className="w-9 h-9 rounded-full bg-[#2A2C5C] text-white flex items-center justify-center hover:bg-[#1E2045] transition-colors shadow-xs cursor-pointer"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4" />
             </button>
-            <h2 className="text-lg md:text-xl font-bold text-slate-900">Notifications</h2>
+            <h2 className="text-lg font-bold text-slate-900">Notifications</h2>
           </div>
 
           <button
             onClick={markAllRead}
-            className="text-xs font-semibold text-[#134F73] hover:text-[#53AADF] flex items-center gap-1 transition-colors"
+            className="text-xs font-semibold text-[#2A2C5C] hover:text-[#1E2045] flex items-center gap-1 transition-colors cursor-pointer"
           >
             <CheckCheck className="w-4 h-4" />
             <span>Mark all read</span>
@@ -109,9 +109,9 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-3 py-1 rounded-full font-bold transition-all ${
+              className={`px-3 py-1 rounded-lg font-semibold transition-all cursor-pointer ${
                 activeFilter === filter
-                  ? 'bg-[#134F73] text-white shadow-sm'
+                  ? 'bg-[#2A2C5C] text-white shadow-xs'
                   : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
               }`}
             >
@@ -125,33 +125,33 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
           {/* Section 1: Academic Updates */}
           {academicList.length > 0 && (
             <div className="space-y-3">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">
+              <h3 className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider px-1">
                 ACADEMIC UPDATES
               </h3>
 
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {academicList.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white rounded-2xl p-4 border border-slate-100 hover:border-slate-300 shadow-sm transition-all flex items-start gap-3.5 relative group"
+                    className="bg-white rounded-xl p-3.5 border border-slate-200 hover:border-[#2A2C5C]/30 shadow-xs transition-all flex items-start gap-3 relative group"
                   >
                     {getIcon(item.iconType)}
 
                     <div className="flex-1 space-y-1">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold tracking-wider uppercase text-emerald-600">
+                        <span className="text-[10px] font-bold tracking-wider uppercase text-emerald-700">
                           {item.type}
                         </span>
                         <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-medium">
                           <span>{item.timeAgo}</span>
                           {item.isUnread && (
-                            <span className="w-2 h-2 rounded-full bg-[#53AADF] shrink-0" />
+                            <span className="w-2 h-2 rounded-full bg-[#2A2C5C] shrink-0" />
                           )}
                         </div>
                       </div>
 
-                      <h4 className="text-sm font-bold text-slate-900 leading-snug">{item.title}</h4>
-                      <p className="text-xs text-slate-600 leading-relaxed">{item.description}</p>
+                      <h4 className="text-xs sm:text-sm font-semibold text-slate-800 leading-snug">{item.title}</h4>
+                      <p className="text-xs text-slate-500 leading-relaxed">{item.description}</p>
                     </div>
                   </div>
                 ))}
@@ -162,33 +162,33 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
           {/* Section 2: Social Updates */}
           {socialList.length > 0 && (
             <div className="space-y-3">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">
+              <h3 className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider px-1">
                 SOCIAL UPDATES
               </h3>
 
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {socialList.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white rounded-2xl p-4 border border-slate-100 hover:border-slate-300 shadow-sm transition-all flex items-start gap-3.5 relative group"
+                    className="bg-white rounded-xl p-3.5 border border-slate-200 hover:border-[#2A2C5C]/30 shadow-xs transition-all flex items-start gap-3 relative group"
                   >
                     {getIcon(item.iconType)}
 
                     <div className="flex-1 space-y-1">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-bold tracking-wider uppercase text-blue-600">
+                        <span className="text-[10px] font-bold tracking-wider uppercase text-[#2A2C5C]">
                           {item.type}
                         </span>
                         <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-medium">
                           <span>{item.timeAgo}</span>
                           {item.isUnread && (
-                            <span className="w-2 h-2 rounded-full bg-[#53AADF] shrink-0" />
+                            <span className="w-2 h-2 rounded-full bg-[#2A2C5C] shrink-0" />
                           )}
                         </div>
                       </div>
 
-                      <h4 className="text-sm font-bold text-slate-900 leading-snug">{item.title}</h4>
-                      <p className="text-xs text-slate-600 leading-relaxed">{item.description}</p>
+                      <h4 className="text-xs sm:text-sm font-semibold text-slate-800 leading-snug">{item.title}</h4>
+                      <p className="text-xs text-slate-500 leading-relaxed">{item.description}</p>
                     </div>
                   </div>
                 ))}

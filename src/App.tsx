@@ -134,21 +134,21 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row antialiased text-slate-800 font-sans selection:bg-blue-100 selection:text-blue-900">
+    <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row antialiased text-slate-800 font-sans selection:bg-[#2A2C5C]/10 selection:text-[#2A2C5C]">
       {/* High Density Desktop Navigation Rail (Hidden in Phone Frame or on Mobile) */}
       {!isPhoneFrame && (
-        <nav className="hidden md:flex w-20 bg-slate-900 flex-col items-center py-6 gap-8 shrink-0 select-none text-slate-400 min-h-screen sticky top-0 z-30">
+        <nav className="hidden md:flex w-20 bg-[#2A2C5C] flex-col items-center py-6 gap-7 shrink-0 select-none text-slate-300 min-h-screen sticky top-0 z-30 shadow-xs">
           {/* Brand Logo */}
           <div
             onClick={() => setActiveTab('home')}
-            className="w-12 h-12 bg-blue-600 hover:bg-blue-500 rounded-xl flex items-center justify-center text-white font-bold text-xl cursor-pointer transition-all shadow-md active:scale-95"
+            className="w-11 h-11 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center text-white font-bold text-lg cursor-pointer transition-all border border-white/10 active:scale-95 shadow-xs"
             title="Campus Connect Home"
           >
             CC
           </div>
 
           {/* Navigation Links */}
-          <div className="flex flex-col gap-6 text-slate-400 w-full items-center">
+          <div className="flex flex-col gap-5 text-slate-300 w-full items-center">
             {/* MAPS */}
             <button
               onClick={() => {
@@ -156,87 +156,87 @@ export default function App() {
                 setActiveTab('map');
               }}
               className={`flex flex-col items-center gap-1 cursor-pointer transition-colors group ${
-                activeTab === 'map' ? 'text-blue-400' : 'hover:text-white'
+                activeTab === 'map' ? 'text-white' : 'hover:text-white text-slate-400'
               }`}
             >
               <div
-                className={`w-7 h-7 border-2 rounded-lg flex items-center justify-center transition-all ${
+                className={`w-7 h-7 border rounded-lg flex items-center justify-center transition-all ${
                   activeTab === 'map'
-                    ? 'border-blue-400 bg-blue-400/10'
-                    : 'border-current group-hover:border-white'
+                    ? 'border-white bg-white/20 text-white'
+                    : 'border-slate-500/50 group-hover:border-slate-300'
                 }`}
               >
                 <Compass className="w-4 h-4" />
               </div>
-              <span className="text-[10px] font-bold tracking-wider uppercase">MAPS</span>
+              <span className="text-[10px] font-semibold tracking-wider uppercase">MAPS</span>
             </button>
 
             {/* BUS */}
             <button
               onClick={() => setIsBusOpen(true)}
-              className="flex flex-col items-center gap-1 cursor-pointer hover:text-white transition-colors group"
+              className="flex flex-col items-center gap-1 cursor-pointer text-slate-400 hover:text-white transition-colors group"
             >
-              <div className="w-7 h-7 border-2 border-current rounded-full flex items-center justify-center group-hover:border-white transition-all">
+              <div className="w-7 h-7 border border-slate-500/50 rounded-lg flex items-center justify-center group-hover:border-slate-300 transition-all">
                 <Bus className="w-4 h-4" />
               </div>
-              <span className="text-[10px] font-bold tracking-wider uppercase">BUS</span>
+              <span className="text-[10px] font-semibold tracking-wider uppercase">BUS</span>
             </button>
 
             {/* SERVICES */}
             <button
               onClick={() => setActiveTab('services')}
               className={`flex flex-col items-center gap-1 cursor-pointer transition-colors group ${
-                activeTab === 'services' ? 'text-blue-400' : 'hover:text-white'
+                activeTab === 'services' ? 'text-white' : 'hover:text-white text-slate-400'
               }`}
             >
               <div
-                className={`w-7 h-7 border-2 rounded-lg flex items-center justify-center transition-all ${
+                className={`w-7 h-7 border rounded-lg flex items-center justify-center transition-all ${
                   activeTab === 'services'
-                    ? 'border-blue-400 bg-blue-400/10'
-                    : 'border-current group-hover:border-white'
+                    ? 'border-white bg-white/20 text-white'
+                    : 'border-slate-500/50 group-hover:border-slate-300'
                 }`}
               >
                 <Layers className="w-4 h-4" />
               </div>
-              <span className="text-[10px] font-bold tracking-wider uppercase">SERVICES</span>
+              <span className="text-[10px] font-semibold tracking-wider uppercase">SERVICES</span>
             </button>
 
             {/* EVENTS */}
             <button
               onClick={() => setActiveTab('events')}
               className={`flex flex-col items-center gap-1 cursor-pointer transition-colors group ${
-                activeTab === 'events' ? 'text-blue-400' : 'hover:text-white'
+                activeTab === 'events' ? 'text-white' : 'hover:text-white text-slate-400'
               }`}
             >
               <div
-                className={`w-7 h-7 border-2 rounded-lg flex items-center justify-center transition-all ${
+                className={`w-7 h-7 border rounded-lg flex items-center justify-center transition-all ${
                   activeTab === 'events'
-                    ? 'border-blue-400 bg-blue-400/10'
-                    : 'border-current group-hover:border-white'
+                    ? 'border-white bg-white/20 text-white'
+                    : 'border-slate-500/50 group-hover:border-slate-300'
                 }`}
               >
                 <Calendar className="w-4 h-4" />
               </div>
-              <span className="text-[10px] font-bold tracking-wider uppercase">EVENTS</span>
+              <span className="text-[10px] font-semibold tracking-wider uppercase">EVENTS</span>
             </button>
 
             {/* HOME */}
             <button
               onClick={() => setActiveTab('home')}
               className={`flex flex-col items-center gap-1 cursor-pointer transition-colors group ${
-                activeTab === 'home' ? 'text-blue-400' : 'hover:text-white'
+                activeTab === 'home' ? 'text-white' : 'hover:text-white text-slate-400'
               }`}
             >
               <div
-                className={`w-7 h-7 border-2 rounded-lg flex items-center justify-center transition-all ${
+                className={`w-7 h-7 border rounded-lg flex items-center justify-center transition-all ${
                   activeTab === 'home'
-                    ? 'border-blue-400 bg-blue-400/10'
-                    : 'border-current group-hover:border-white'
+                    ? 'border-white bg-white/20 text-white'
+                    : 'border-slate-500/50 group-hover:border-slate-300'
                 }`}
               >
                 <Footprints className="w-4 h-4" />
               </div>
-              <span className="text-[10px] font-bold tracking-wider uppercase">HOME</span>
+              <span className="text-[10px] font-semibold tracking-wider uppercase">HOME</span>
             </button>
           </div>
 
@@ -246,10 +246,10 @@ export default function App() {
             className="mt-auto pb-4 cursor-pointer group flex flex-col items-center gap-1"
             title="Student Profile & ID"
           >
-            <div className="w-10 h-10 rounded-full bg-slate-700 hover:bg-slate-600 border border-slate-600 flex items-center justify-center text-slate-200 text-xs font-bold transition-colors">
+            <div className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white text-xs font-semibold transition-colors">
               UD
             </div>
-            <span className="text-[9px] font-semibold text-slate-400 group-hover:text-slate-200">
+            <span className="text-[9px] font-medium text-slate-400 group-hover:text-slate-200">
               Profile
             </span>
           </div>
@@ -265,7 +265,7 @@ export default function App() {
             {(isPhoneFrame || true) && (
               <div
                 onClick={() => setActiveTab('home')}
-                className="md:hidden w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-black text-white text-xs cursor-pointer"
+                className="md:hidden w-8 h-8 rounded-lg bg-[#2A2C5C] flex items-center justify-center font-bold text-white text-xs cursor-pointer shadow-xs"
               >
                 CC
               </div>
@@ -285,7 +285,7 @@ export default function App() {
                 onFocus={() => {
                   if (searchQuery.length > 0) setIsSearchActive(true);
                 }}
-                className="w-full bg-slate-100 border-none rounded-lg py-2 pl-9 pr-8 text-xs sm:text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                className="w-full bg-slate-100/80 border border-slate-200/60 rounded-xl py-2 pl-9 pr-8 text-xs sm:text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-[#2A2C5C]/20 focus:border-[#2A2C5C] outline-none transition-all"
               />
               <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
               {searchQuery && (
@@ -307,7 +307,7 @@ export default function App() {
                     <span>Results for &ldquo;{searchQuery}&rdquo;</span>
                     <button
                       onClick={() => setIsSearchActive(false)}
-                      className="text-blue-600 hover:underline text-[10px]"
+                      className="text-[#2A2C5C] hover:underline text-[10px]"
                     >
                       Close
                     </button>
@@ -316,7 +316,7 @@ export default function App() {
                   {/* Classrooms */}
                   {searchResults.classrooms.length > 0 && (
                     <div className="space-y-1">
-                      <span className="text-[10px] font-bold text-blue-700 uppercase tracking-wider block">
+                      <span className="text-[10px] font-bold text-[#2A2C5C] uppercase tracking-wider block">
                         Classrooms & Labs
                       </span>
                       {searchResults.classrooms.map(({ classroom, building }) => (
@@ -326,10 +326,10 @@ export default function App() {
                             setIsSearchActive(false);
                             handleNavigateToRoom(classroom, building);
                           }}
-                          className="p-2 bg-slate-50 hover:bg-blue-50 rounded-lg cursor-pointer flex items-center justify-between text-xs transition-colors"
+                          className="p-2 bg-slate-50 hover:bg-[#2A2C5C]/5 rounded-lg cursor-pointer flex items-center justify-between text-xs transition-colors"
                         >
                           <div>
-                            <span className="font-bold text-blue-700">{classroom.roomNumber}</span>
+                            <span className="font-bold text-[#2A2C5C]">{classroom.roomNumber}</span>
                             <span className="text-slate-600 font-medium ml-2">{classroom.name}</span>
                             <span className="text-slate-400 text-[10px] block">
                               {building.name} • Floor {classroom.floor}
@@ -357,12 +357,12 @@ export default function App() {
                             setFocusedBuildingId(bld.id);
                             setActiveTab('map');
                           }}
-                          className="p-2 bg-slate-50 hover:bg-blue-50 rounded-lg cursor-pointer flex items-center justify-between text-xs transition-colors"
+                          className="p-2 bg-slate-50 hover:bg-[#2A2C5C]/5 rounded-lg cursor-pointer flex items-center justify-between text-xs transition-colors"
                         >
                           <span className="font-bold text-slate-800">
                             {bld.name} ({bld.code})
                           </span>
-                          <span className="text-xs text-blue-600 font-semibold">View Map →</span>
+                          <span className="text-xs text-[#2A2C5C] font-semibold">View Map →</span>
                         </div>
                       ))}
                     </div>
@@ -400,38 +400,38 @@ export default function App() {
                   setMapMode('2d');
                   setActiveTab('map');
                 }}
-                className={`px-3 py-1 text-xs font-bold rounded-md border transition-all ${
+                className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all ${
                   activeTab === 'map' && mapMode === '2d'
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-blue-50 text-blue-600 border-blue-100 hover:bg-blue-100'
+                    ? 'bg-[#2A2C5C] text-white border-[#2A2C5C]'
+                    : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
                 }`}
               >
-                2D VIEW
+                2D Plan
               </button>
               <button
                 onClick={() => {
                   setMapMode('3d');
                   setActiveTab('map');
                 }}
-                className={`px-3 py-1 text-xs font-bold rounded-md border transition-all ${
+                className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all ${
                   activeTab === 'map' && mapMode === '3d'
-                    ? 'bg-slate-800 text-white border-slate-800'
-                    : 'bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200'
+                    ? 'bg-[#2A2C5C] text-white border-[#2A2C5C]'
+                    : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
                 }`}
               >
-                3D MODE
+                3D View
               </button>
             </div>
           </div>
 
           {/* Right Status Indicators & Action Buttons */}
-          <div className="flex items-center gap-3 sm:gap-5 text-sm font-medium">
+          <div className="flex items-center gap-3 sm:gap-4 text-sm font-medium">
             {/* Campus Status Indicator */}
             <div className="hidden lg:flex flex-col items-end">
-              <span className="text-slate-500 text-[10px] uppercase tracking-wider font-bold">
+              <span className="text-slate-400 text-[10px] uppercase tracking-wider font-semibold">
                 Campus Status
               </span>
-              <span className="text-green-600 flex items-center gap-1 font-bold text-xs">
+              <span className="text-emerald-700 flex items-center gap-1 font-semibold text-xs">
                 ● Normal Operations
               </span>
             </div>
@@ -439,39 +439,39 @@ export default function App() {
             {/* Help Desk Button */}
             <button
               onClick={() => setIsHelpOpen(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-3 sm:px-4 py-2 rounded-lg text-xs font-bold transition-all active:scale-95 shadow-xs shrink-0"
+              className="bg-[#2A2C5C] hover:bg-[#1E2045] text-white px-3 sm:px-4 py-2 rounded-xl text-xs font-medium transition-all active:scale-95 shadow-xs shrink-0"
             >
-              HELP DESK
+              Help Desk
             </button>
 
             {/* Notification Bell */}
             <button
               id="btn-open-notifications"
               onClick={() => setIsNotifOpen(true)}
-              className="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 flex items-center justify-center transition-all relative text-slate-700 shrink-0"
+              className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 flex items-center justify-center transition-all relative text-slate-700 shrink-0"
               title="Notifications"
             >
               <Bell className="w-4 h-4" />
               {unreadNotifCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-blue-600 ring-2 ring-white" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#2A2C5C] ring-2 ring-white" />
               )}
             </button>
 
             {/* Phone Mockup Frame Switcher */}
             <button
               onClick={() => setIsPhoneFrame(!isPhoneFrame)}
-              className="hidden sm:flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-slate-900 px-2.5 py-1.5 rounded-lg bg-slate-100 border border-slate-200 transition-colors shrink-0"
+              className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 px-2.5 py-1.5 rounded-xl bg-slate-100 border border-slate-200 transition-colors shrink-0"
               title="Toggle between Mobile Frame and High Density View"
             >
               {isPhoneFrame ? (
                 <>
-                  <Monitor className="w-3.5 h-3.5 text-blue-600" />
-                  <span className="hidden xl:inline">Full Layout</span>
+                  <Monitor className="w-3.5 h-3.5 text-[#2A2C5C]" />
+                  <span className="hidden xl:inline">Full Screen</span>
                 </>
               ) : (
                 <>
-                  <Smartphone className="w-3.5 h-3.5 text-blue-600" />
-                  <span className="hidden xl:inline">Phone Frame</span>
+                  <Smartphone className="w-3.5 h-3.5 text-[#2A2C5C]" />
+                  <span className="hidden xl:inline">Mobile Frame</span>
                 </>
               )}
             </button>
@@ -479,7 +479,7 @@ export default function App() {
             {/* Splash Tour button */}
             <button
               onClick={() => setShowSplash(true)}
-              className="text-[11px] font-semibold text-blue-600 hover:text-blue-800 px-2 py-1 rounded bg-blue-50 transition-colors hidden sm:inline"
+              className="text-xs font-medium text-[#2A2C5C] hover:text-[#1E2045] px-2.5 py-1.5 rounded-xl bg-[#2A2C5C]/5 hover:bg-[#2A2C5C]/10 transition-colors hidden sm:inline"
             >
               Tour
             </button>
@@ -511,12 +511,12 @@ export default function App() {
               {/* Left & Center Main Dashboard Area (2-Column Flex) */}
               <div className="flex-[2] flex flex-col gap-4 min-w-0">
                 {/* High Density Interactive Campus Blueprint Overview Card */}
-                <div className="bg-slate-200 rounded-2xl relative border-2 border-slate-300 shadow-inner overflow-hidden min-h-[240px] max-h-[340px] flex flex-col justify-between p-4 group">
+                <div className="bg-slate-100 rounded-2xl relative border border-slate-200 shadow-xs overflow-hidden min-h-[240px] max-h-[340px] flex flex-col justify-between p-4 group">
                   {/* Subtle Grid Dot Matrix Background */}
                   <div
-                    className="absolute inset-0 opacity-10 pointer-events-none"
+                    className="absolute inset-0 opacity-5 pointer-events-none"
                     style={{
-                      backgroundImage: 'radial-gradient(#000 1px, transparent 1px)',
+                      backgroundImage: 'radial-gradient(#2A2C5C 1px, transparent 1px)',
                       backgroundSize: '20px 20px',
                     }}
                   />
@@ -527,7 +527,7 @@ export default function App() {
                       setFocusedBuildingId('bld-science');
                       setActiveTab('map');
                     }}
-                    className="absolute top-8 left-12 sm:left-20 px-3 py-2 bg-white/90 hover:bg-white border border-slate-400 rounded-lg flex items-center justify-center font-bold text-xs text-slate-700 transform -rotate-6 shadow-sm hover:scale-105 transition-all cursor-pointer z-10"
+                    className="absolute top-8 left-12 sm:left-20 px-3 py-1.5 bg-white/90 hover:bg-white border border-slate-200 rounded-lg flex items-center justify-center font-medium text-xs text-slate-700 transform -rotate-6 shadow-xs hover:scale-105 transition-all cursor-pointer z-10"
                   >
                     Science Block
                   </div>
@@ -537,7 +537,7 @@ export default function App() {
                       setFocusedBuildingId('bld-library');
                       setActiveTab('map');
                     }}
-                    className="absolute top-24 sm:top-14 right-10 sm:right-24 px-3 py-2 bg-blue-100/90 hover:bg-blue-100 border border-blue-400 rounded-lg flex items-center justify-center font-bold text-xs text-blue-700 transform rotate-3 shadow-sm hover:scale-105 transition-all cursor-pointer z-10"
+                    className="absolute top-24 sm:top-14 right-10 sm:right-24 px-3 py-1.5 bg-[#2A2C5C]/10 hover:bg-[#2A2C5C]/20 border border-[#2A2C5C]/30 rounded-lg flex items-center justify-center font-medium text-xs text-[#2A2C5C] transform rotate-3 shadow-xs hover:scale-105 transition-all cursor-pointer z-10"
                   >
                     Main Library
                   </div>
@@ -547,19 +547,19 @@ export default function App() {
                       setFocusedBuildingId('bld-eng');
                       setActiveTab('map');
                     }}
-                    className="absolute bottom-12 left-1/3 px-3 py-2 bg-slate-300/90 hover:bg-slate-300 border border-slate-400 rounded-lg flex items-center justify-center font-bold text-xs text-slate-800 shadow-sm hover:scale-105 transition-all cursor-pointer z-10"
+                    className="absolute bottom-12 left-1/3 px-3 py-1.5 bg-white/90 hover:bg-white border border-slate-200 rounded-lg flex items-center justify-center font-medium text-xs text-slate-800 shadow-xs hover:scale-105 transition-all cursor-pointer z-10"
                   >
                     Engineering Wing C
                   </div>
 
                   {/* Top-Left Legend Overlay */}
-                  <div className="bg-white/90 backdrop-blur-xs p-2 rounded-lg shadow-sm text-[10px] font-bold space-y-1 z-10 w-fit border border-slate-200">
+                  <div className="bg-white/90 backdrop-blur-xs p-2 rounded-lg text-[10px] font-medium space-y-1 z-10 w-fit border border-slate-200 shadow-xs">
                     <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 bg-blue-500 rounded-xs" />
+                      <div className="w-2 h-2 bg-[#2A2C5C] rounded-xs" />
                       <span>My Location (Fresher Hub)</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 bg-amber-400 rounded-xs" />
+                      <div className="w-2 h-2 bg-amber-400 rounded-xs" />
                       <span>Next Class: Room 204</span>
                     </div>
                   </div>
@@ -572,7 +572,7 @@ export default function App() {
                           setMapMode('3d');
                           setActiveTab('map');
                         }}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-md flex items-center gap-1.5 transition-all active:scale-95"
+                        className="bg-[#2A2C5C] hover:bg-[#1E2045] text-white font-medium text-xs px-3.5 py-1.5 rounded-lg shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
                       >
                         <Sparkles className="w-3.5 h-3.5" />
                         <span>Explore 3D Orbit Map</span>
@@ -582,7 +582,7 @@ export default function App() {
                           setMapMode('2d');
                           setActiveTab('map');
                         }}
-                        className="bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm border border-slate-300 flex items-center gap-1.5 transition-all"
+                        className="bg-white hover:bg-slate-50 text-slate-700 font-medium text-xs px-3 py-1.5 rounded-lg border border-slate-200 flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
                       >
                         <Layers className="w-3.5 h-3.5 text-slate-500" />
                         <span>2D Floor Plans</span>
@@ -593,14 +593,14 @@ export default function App() {
                     <div className="flex gap-1.5">
                       <button
                         onClick={() => setActiveTab('map')}
-                        className="w-8 h-8 bg-white hover:bg-slate-100 rounded-lg shadow-sm flex items-center justify-center font-bold text-sm text-slate-700 border border-slate-300 active:scale-95"
+                        className="w-7 h-7 bg-white hover:bg-slate-100 rounded-lg flex items-center justify-center font-bold text-xs text-slate-700 border border-slate-200 active:scale-95 shadow-xs cursor-pointer"
                         title="Zoom In / Open Map"
                       >
                         +
                       </button>
                       <button
                         onClick={() => setActiveTab('map')}
-                        className="w-8 h-8 bg-white hover:bg-slate-100 rounded-lg shadow-sm flex items-center justify-center font-bold text-sm text-slate-700 border border-slate-300 active:scale-95"
+                        className="w-7 h-7 bg-white hover:bg-slate-100 rounded-lg flex items-center justify-center font-bold text-xs text-slate-700 border border-slate-200 active:scale-95 shadow-xs cursor-pointer"
                         title="Zoom Out / Open Map"
                       >
                         -
@@ -614,18 +614,18 @@ export default function App() {
                   {/* Event Schedule Card */}
                   <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-3">
                     <div className="flex justify-between items-center">
-                      <h3 className="font-bold text-xs uppercase tracking-widest text-slate-400">
+                      <h3 className="font-semibold text-xs uppercase tracking-wider text-slate-400">
                         Event Schedule
                       </h3>
                       <button
                         onClick={() => setActiveTab('events')}
-                        className="text-[10px] text-blue-600 font-bold hover:underline cursor-pointer"
+                        className="text-[10px] text-[#2A2C5C] font-semibold hover:underline cursor-pointer"
                       >
                         VIEW ALL
                       </button>
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="space-y-2.5">
                       {/* Event 1 */}
                       <div
                         onClick={() => {
@@ -634,12 +634,12 @@ export default function App() {
                         }}
                         className="flex items-center gap-3 p-1.5 hover:bg-slate-50 rounded-xl cursor-pointer transition-colors"
                       >
-                        <div className="w-10 h-10 bg-blue-100 text-blue-700 rounded-lg flex flex-col items-center justify-center shrink-0 font-sans">
+                        <div className="w-10 h-10 bg-[#2A2C5C]/10 text-[#2A2C5C] rounded-lg flex flex-col items-center justify-center shrink-0 font-sans">
                           <span className="text-[9px] font-bold leading-none">SEP</span>
                           <span className="text-sm font-black leading-none mt-0.5">24</span>
                         </div>
                         <div className="overflow-hidden flex-1">
-                          <p className="text-xs font-bold text-slate-900 truncate">
+                          <p className="text-xs font-semibold text-slate-800 truncate">
                             AI Ethics Workshop - Auditorium A
                           </p>
                           <p className="text-[10px] text-slate-500 font-medium">
@@ -656,12 +656,12 @@ export default function App() {
                         }}
                         className="flex items-center gap-3 p-1.5 hover:bg-slate-50 rounded-xl cursor-pointer transition-colors"
                       >
-                        <div className="w-10 h-10 bg-purple-100 text-purple-700 rounded-lg flex flex-col items-center justify-center shrink-0 font-sans">
+                        <div className="w-10 h-10 bg-slate-100 text-slate-700 rounded-lg flex flex-col items-center justify-center shrink-0 font-sans">
                           <span className="text-[9px] font-bold leading-none">SEP</span>
                           <span className="text-sm font-black leading-none mt-0.5">25</span>
                         </div>
                         <div className="overflow-hidden flex-1">
-                          <p className="text-xs font-bold text-slate-900 truncate">
+                          <p className="text-xs font-semibold text-slate-800 truncate">
                             Fresher Networking Night
                           </p>
                           <p className="text-[10px] text-slate-500 font-medium">
@@ -675,12 +675,12 @@ export default function App() {
                   {/* Services & Onboarding 4-box Card */}
                   <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-3">
                     <div className="flex justify-between items-center">
-                      <h3 className="font-bold text-xs uppercase tracking-widest text-slate-400">
+                      <h3 className="font-semibold text-xs uppercase tracking-wider text-slate-400">
                         Services & Onboarding
                       </h3>
                       <button
                         onClick={() => setActiveTab('services')}
-                        className="text-[10px] text-blue-600 font-bold hover:underline cursor-pointer"
+                        className="text-[10px] text-[#2A2C5C] font-semibold hover:underline cursor-pointer"
                       >
                         HUB
                       </button>
@@ -689,37 +689,37 @@ export default function App() {
                     <div className="grid grid-cols-2 gap-2">
                       <div
                         onClick={() => setIsHostelOpen(true)}
-                        className="bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex flex-col items-center gap-1 cursor-pointer hover:bg-blue-50 hover:border-blue-200 transition-all group"
+                        className="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col items-center gap-1 cursor-pointer hover:bg-[#2A2C5C]/5 hover:border-[#2A2C5C]/20 transition-all group"
                       >
-                        <span className="text-lg group-hover:scale-110 transition-transform">🏠</span>
-                        <span className="text-[10px] font-bold text-slate-700 group-hover:text-blue-700">
+                        <span className="text-base group-hover:scale-105 transition-transform">🏠</span>
+                        <span className="text-[10px] font-medium text-slate-700 group-hover:text-[#2A2C5C]">
                           Hostel
                         </span>
                       </div>
                       <div
                         onClick={() => setIsBusOpen(true)}
-                        className="bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex flex-col items-center gap-1 cursor-pointer hover:bg-blue-50 hover:border-blue-200 transition-all group"
+                        className="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col items-center gap-1 cursor-pointer hover:bg-[#2A2C5C]/5 hover:border-[#2A2C5C]/20 transition-all group"
                       >
-                        <span className="text-lg group-hover:scale-110 transition-transform">🚌</span>
-                        <span className="text-[10px] font-bold text-slate-700 group-hover:text-blue-700">
+                        <span className="text-base group-hover:scale-105 transition-transform">🚌</span>
+                        <span className="text-[10px] font-medium text-slate-700 group-hover:text-[#2A2C5C]">
                           Bus Reg
                         </span>
                       </div>
                       <div
                         onClick={() => setIsWorkshopOpen(true)}
-                        className="bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex flex-col items-center gap-1 cursor-pointer hover:bg-blue-50 hover:border-blue-200 transition-all group"
+                        className="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col items-center gap-1 cursor-pointer hover:bg-[#2A2C5C]/5 hover:border-[#2A2C5C]/20 transition-all group"
                       >
-                        <span className="text-lg group-hover:scale-110 transition-transform">💼</span>
-                        <span className="text-[10px] font-bold text-slate-700 group-hover:text-blue-700">
+                        <span className="text-base group-hover:scale-105 transition-transform">💼</span>
+                        <span className="text-[10px] font-medium text-slate-700 group-hover:text-[#2A2C5C]">
                           Workshop
                         </span>
                       </div>
                       <div
                         onClick={() => setIsHelpOpen(true)}
-                        className="bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex flex-col items-center gap-1 cursor-pointer hover:bg-blue-50 hover:border-blue-200 transition-all group"
+                        className="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col items-center gap-1 cursor-pointer hover:bg-[#2A2C5C]/5 hover:border-[#2A2C5C]/20 transition-all group"
                       >
-                        <span className="text-lg group-hover:scale-110 transition-transform">📄</span>
-                        <span className="text-[10px] font-bold text-slate-700 group-hover:text-blue-700">
+                        <span className="text-base group-hover:scale-105 transition-transform">📄</span>
+                        <span className="text-[10px] font-medium text-slate-700 group-hover:text-[#2A2C5C]">
                           Forms
                         </span>
                       </div>
@@ -730,12 +730,12 @@ export default function App() {
                 {/* Quick Action Bar */}
                 <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs space-y-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-xs uppercase tracking-widest text-slate-400">
+                    <h3 className="font-semibold text-xs uppercase tracking-wider text-slate-400">
                       Quick Action Shortcuts
                     </h3>
                     <button
                       onClick={() => setIsHelpOpen(true)}
-                      className="text-[10px] text-blue-600 font-bold hover:underline"
+                      className="text-[10px] text-[#2A2C5C] font-semibold hover:underline"
                     >
                       See All
                     </button>
@@ -746,14 +746,14 @@ export default function App() {
                     <button
                       id="quick-action-bus"
                       onClick={() => setIsBusOpen(true)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-xl shadow-xs transition-all active:scale-95 flex flex-col items-center justify-center text-center space-y-1.5 group"
+                      className="bg-[#2A2C5C] hover:bg-[#1E2045] text-white p-3 rounded-xl shadow-xs transition-all active:scale-95 flex flex-col items-center justify-center text-center space-y-1.5 group cursor-pointer"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:scale-105 transition-transform">
                         <Bus className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold">Bus Service</h4>
-                        <p className="text-[10px] text-blue-100 opacity-90">Pass & Routes</p>
+                        <h4 className="text-xs font-semibold">Bus Service</h4>
+                        <p className="text-[10px] text-slate-300">Pass & Routes</p>
                       </div>
                     </button>
 
@@ -761,14 +761,14 @@ export default function App() {
                     <button
                       id="quick-action-admission"
                       onClick={() => setIsProfileOpen(true)}
-                      className="bg-slate-800 hover:bg-slate-900 text-white p-3 rounded-xl shadow-xs transition-all active:scale-95 flex flex-col items-center justify-center text-center space-y-1.5 group"
+                      className="bg-slate-800 hover:bg-slate-900 text-white p-3 rounded-xl shadow-xs transition-all active:scale-95 flex flex-col items-center justify-center text-center space-y-1.5 group cursor-pointer"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:scale-105 transition-transform">
                         <GraduationCap className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold">Admission</h4>
-                        <p className="text-[10px] text-slate-300 opacity-90">ID & Status</p>
+                        <h4 className="text-xs font-semibold">Admission</h4>
+                        <p className="text-[10px] text-slate-300">ID & Status</p>
                       </div>
                     </button>
 
@@ -776,14 +776,14 @@ export default function App() {
                     <button
                       id="quick-action-hostel"
                       onClick={() => setIsHostelOpen(true)}
-                      className="bg-slate-800 hover:bg-slate-900 text-white p-3 rounded-xl shadow-xs transition-all active:scale-95 flex flex-col items-center justify-center text-center space-y-1.5 group"
+                      className="bg-slate-800 hover:bg-slate-900 text-white p-3 rounded-xl shadow-xs transition-all active:scale-95 flex flex-col items-center justify-center text-center space-y-1.5 group cursor-pointer"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:scale-105 transition-transform">
                         <Bed className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold">Hostel</h4>
-                        <p className="text-[10px] text-slate-300 opacity-90">Room Info</p>
+                        <h4 className="text-xs font-semibold">Hostel</h4>
+                        <p className="text-[10px] text-slate-300">Room Info</p>
                       </div>
                     </button>
 
@@ -791,14 +791,14 @@ export default function App() {
                     <button
                       id="quick-action-library"
                       onClick={() => setIsLibraryOpen(true)}
-                      className="bg-slate-800 hover:bg-slate-900 text-white p-3 rounded-xl shadow-xs transition-all active:scale-95 flex flex-col items-center justify-center text-center space-y-1.5 group"
+                      className="bg-slate-800 hover:bg-slate-900 text-white p-3 rounded-xl shadow-xs transition-all active:scale-95 flex flex-col items-center justify-center text-center space-y-1.5 group cursor-pointer"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:scale-105 transition-transform">
                         <BookOpen className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold">Library</h4>
-                        <p className="text-[10px] text-slate-300 opacity-90">Book Search</p>
+                        <h4 className="text-xs font-semibold">Library</h4>
+                        <p className="text-[10px] text-slate-300">Book Search</p>
                       </div>
                     </button>
                   </div>
@@ -807,7 +807,7 @@ export default function App() {
                 {/* Canteens & Dining Cards */}
                 <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs space-y-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-xs uppercase tracking-widest text-slate-400">
+                    <h3 className="font-semibold text-xs uppercase tracking-wider text-slate-400">
                       Campus Dining & Cafes
                     </h3>
                     <button
@@ -815,7 +815,7 @@ export default function App() {
                         setSelectedCanteenId(null);
                         setIsCanteenOpen(true);
                       }}
-                      className="text-[10px] text-blue-600 font-bold hover:underline"
+                      className="text-[10px] text-[#2A2C5C] font-semibold hover:underline"
                     >
                       See All Menus
                     </button>
@@ -850,55 +850,55 @@ export default function App() {
 
               {/* Right Aside Sidebar Area (Live Bus Timings & Canteen Status) */}
               <aside className="w-full xl:w-72 2xl:w-80 flex flex-col gap-4 shrink-0">
-                {/* Live Bus Timings Dark Indigo Widget */}
-                <div className="bg-indigo-900 text-white p-4 rounded-2xl shadow-lg border border-indigo-800 shrink-0">
+                {/* Live Bus Timings Widget */}
+                <div className="bg-[#2A2C5C] text-white p-4 rounded-2xl shadow-xs border border-[#2A2C5C] shrink-0">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xs font-bold uppercase tracking-widest opacity-70">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
                       Live Bus Timings
                     </h3>
                     <button
                       onClick={() => setIsBusOpen(true)}
-                      className="text-[10px] text-indigo-200 hover:text-white font-semibold underline"
+                      className="text-[10px] text-slate-300 hover:text-white font-medium underline"
                     >
                       All Routes
                     </button>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     <div
                       onClick={() => setIsBusOpen(true)}
-                      className="flex items-center justify-between border-b border-indigo-800/80 pb-2.5 cursor-pointer hover:bg-indigo-800/40 p-1 rounded-lg transition-colors"
+                      className="flex items-center justify-between border-b border-white/10 pb-2.5 cursor-pointer hover:bg-white/5 p-1 rounded-lg transition-colors"
                     >
                       <div>
-                        <p className="text-xs font-bold">Route 101 - North Campus</p>
-                        <p className="text-[10px] opacity-70">Arriving at Central Station</p>
+                        <p className="text-xs font-semibold">Route 101 - North Campus</p>
+                        <p className="text-[10px] text-slate-300">Arriving at Central Station</p>
                       </div>
-                      <span className="bg-green-500 text-[10px] px-2 py-0.5 rounded-md font-black text-white shrink-0">
+                      <span className="bg-emerald-600 text-[10px] px-2 py-0.5 rounded-md font-bold text-white shrink-0">
                         3 MIN
                       </span>
                     </div>
 
                     <div
                       onClick={() => setIsBusOpen(true)}
-                      className="flex items-center justify-between border-b border-indigo-800/80 pb-2.5 cursor-pointer hover:bg-indigo-800/40 p-1 rounded-lg transition-colors"
+                      className="flex items-center justify-between border-b border-white/10 pb-2.5 cursor-pointer hover:bg-white/5 p-1 rounded-lg transition-colors"
                     >
                       <div>
-                        <p className="text-xs font-bold">Route 404 - Hostel Block</p>
-                        <p className="text-[10px] opacity-70">Leaving from South Gate</p>
+                        <p className="text-xs font-semibold">Route 404 - Hostel Block</p>
+                        <p className="text-[10px] text-slate-300">Leaving from South Gate</p>
                       </div>
-                      <span className="bg-amber-500 text-[10px] px-2 py-0.5 rounded-md font-black text-white shrink-0">
+                      <span className="bg-amber-600 text-[10px] px-2 py-0.5 rounded-md font-bold text-white shrink-0">
                         12 MIN
                       </span>
                     </div>
 
                     <div
                       onClick={() => setIsBusOpen(true)}
-                      className="flex items-center justify-between cursor-pointer hover:bg-indigo-800/40 p-1 rounded-lg transition-colors"
+                      className="flex items-center justify-between cursor-pointer hover:bg-white/5 p-1 rounded-lg transition-colors"
                     >
                       <div>
-                        <p className="text-xs font-bold">Route 002 - City Shuttle</p>
-                        <p className="text-[10px] opacity-70">Express Service</p>
+                        <p className="text-xs font-semibold">Route 002 - City Shuttle</p>
+                        <p className="text-[10px] text-slate-300">Express Service</p>
                       </div>
-                      <span className="bg-slate-600 text-[10px] px-2 py-0.5 rounded-md font-black text-white shrink-0">
+                      <span className="bg-slate-600 text-[10px] px-2 py-0.5 rounded-md font-bold text-white shrink-0">
                         DELAY
                       </span>
                     </div>
@@ -908,7 +908,7 @@ export default function App() {
                 {/* Canteen Status Widget */}
                 <div className="bg-white border border-slate-200 p-4 rounded-2xl flex flex-col shadow-xs gap-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
                       Canteen Status
                     </h3>
                     <button
@@ -916,7 +916,7 @@ export default function App() {
                         setSelectedCanteenId(null);
                         setIsCanteenOpen(true);
                       }}
-                      className="text-[10px] text-blue-600 font-bold hover:underline"
+                      className="text-[10px] text-[#2A2C5C] font-semibold hover:underline"
                     >
                       View
                     </button>
@@ -926,11 +926,11 @@ export default function App() {
                     {/* North Hall Canteen */}
                     <div
                       onClick={() => handleOpenCanteen('canteen-unique')}
-                      className="p-3 bg-slate-50 hover:bg-blue-50/50 rounded-xl border border-slate-100 cursor-pointer transition-colors"
+                      className="p-3 bg-slate-50 hover:bg-[#2A2C5C]/5 rounded-xl border border-slate-100 cursor-pointer transition-colors"
                     >
                       <div className="flex justify-between items-start mb-1">
-                        <span className="text-xs font-bold text-slate-800">North Hall Canteen</span>
-                        <span className="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded border border-green-200">
+                        <span className="text-xs font-semibold text-slate-800">North Hall Canteen</span>
+                        <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
                           OPEN
                         </span>
                       </div>
@@ -951,8 +951,8 @@ export default function App() {
                       className="p-3 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-100 cursor-pointer transition-colors"
                     >
                       <div className="flex justify-between items-start mb-1">
-                        <span className="text-xs font-bold text-slate-800">The Brew Station</span>
-                        <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
+                        <span className="text-xs font-semibold text-slate-800">The Brew Station</span>
+                        <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
                           CLOSED
                         </span>
                       </div>
@@ -962,9 +962,9 @@ export default function App() {
                     {/* Campus News Banner */}
                     <div
                       onClick={() => setIsNewsOpen(true)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-xl shadow-xs cursor-pointer transition-colors mt-2"
+                      className="bg-[#2A2C5C] hover:bg-[#1E2045] text-white p-3 rounded-xl shadow-xs cursor-pointer transition-colors mt-2"
                     >
-                      <p className="text-[10px] font-bold uppercase tracking-tight text-blue-100 mb-1 flex items-center gap-1">
+                      <p className="text-[10px] font-semibold uppercase tracking-tight text-slate-300 mb-1 flex items-center gap-1">
                         <Newspaper className="w-3 h-3" />
                         <span>Campus News</span>
                       </p>
@@ -987,7 +987,7 @@ export default function App() {
               <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <h2 className="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <Compass className="w-5 h-5 text-blue-600" />
+                    <Compass className="w-5 h-5 text-[#2A2C5C]" />
                     Campus Interactive Navigation
                   </h2>
                   <p className="text-xs text-slate-500">
@@ -1000,9 +1000,9 @@ export default function App() {
                   <button
                     id="btn-switch-3d"
                     onClick={() => setMapMode('3d')}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
                       mapMode === '3d'
-                        ? 'bg-blue-600 text-white shadow-xs'
+                        ? 'bg-[#2A2C5C] text-white shadow-xs'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -1012,9 +1012,9 @@ export default function App() {
                   <button
                     id="btn-switch-2d"
                     onClick={() => setMapMode('2d')}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
                       mapMode === '2d'
-                        ? 'bg-blue-600 text-white shadow-xs'
+                        ? 'bg-[#2A2C5C] text-white shadow-xs'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
@@ -1051,8 +1051,8 @@ export default function App() {
           {/* ========================================================================= */}
           {activeTab === 'services' && (
             <div className="p-4 sm:p-5 lg:p-6 space-y-5 pb-24 md:pb-6 animate-fade-in">
-              <div className="bg-slate-900 text-white rounded-2xl p-6 shadow-md border border-slate-800">
-                <h2 className="text-lg md:text-xl font-bold">Campus Services & Onboarding</h2>
+              <div className="bg-[#2A2C5C] text-white rounded-2xl p-5 shadow-xs border border-[#2A2C5C]">
+                <h2 className="text-base md:text-lg font-bold">Campus Services & Onboarding</h2>
                 <p className="text-xs text-slate-300 mt-1">
                   One-stop access to transport, accommodation, books, dining & administrative support
                 </p>
@@ -1062,18 +1062,18 @@ export default function App() {
                 {/* Bus Card */}
                 <div
                   onClick={() => setIsBusOpen(true)}
-                  className="bg-white rounded-2xl border border-slate-200 hover:border-blue-500 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
+                  className="bg-white rounded-2xl border border-slate-200 hover:border-[#2A2C5C]/40 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-[#2A2C5C]/10 text-[#2A2C5C] flex items-center justify-center group-hover:scale-105 transition-transform">
                     <Bus className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">Bus Transit & Pass</h4>
+                    <h4 className="text-sm font-semibold text-slate-900">Bus Transit & Pass</h4>
                     <p className="text-xs text-slate-500 mt-0.5">
                       Live timings, 24 routes, driver tracker & digital transport ID
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-blue-600 flex items-center gap-1">
+                  <span className="text-xs font-semibold text-[#2A2C5C] flex items-center gap-1">
                     Manage Transport →
                   </span>
                 </div>
@@ -1081,18 +1081,18 @@ export default function App() {
                 {/* Hostel Card */}
                 <div
                   onClick={() => setIsHostelOpen(true)}
-                  className="bg-white rounded-2xl border border-slate-200 hover:border-blue-500 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
+                  className="bg-white rounded-2xl border border-slate-200 hover:border-[#2A2C5C]/40 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-[#2A2C5C]/10 text-[#2A2C5C] flex items-center justify-center group-hover:scale-105 transition-transform">
                     <Bed className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">Hostel & Housing</h4>
+                    <h4 className="text-sm font-semibold text-slate-900">Hostel & Housing</h4>
                     <p className="text-xs text-slate-500 mt-0.5">
                       Room allotment, warden hotline, maintenance & e-gate pass
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-blue-600 flex items-center gap-1">
+                  <span className="text-xs font-semibold text-[#2A2C5C] flex items-center gap-1">
                     Hostel Services →
                   </span>
                 </div>
@@ -1100,18 +1100,18 @@ export default function App() {
                 {/* Library Card */}
                 <div
                   onClick={() => setIsLibraryOpen(true)}
-                  className="bg-white rounded-2xl border border-slate-200 hover:border-blue-500 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
+                  className="bg-white rounded-2xl border border-slate-200 hover:border-[#2A2C5C]/40 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-[#2A2C5C]/10 text-[#2A2C5C] flex items-center justify-center group-hover:scale-105 transition-transform">
                     <BookOpen className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">Central Library</h4>
+                    <h4 className="text-sm font-semibold text-slate-900">Central Library</h4>
                     <p className="text-xs text-slate-500 mt-0.5">
                       Book catalog, digital borrowing, quiet study pods & IEEE papers
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-blue-600 flex items-center gap-1">
+                  <span className="text-xs font-semibold text-[#2A2C5C] flex items-center gap-1">
                     Search Catalog →
                   </span>
                 </div>
@@ -1119,18 +1119,18 @@ export default function App() {
                 {/* Canteens Card */}
                 <div
                   onClick={() => setIsCanteenOpen(true)}
-                  className="bg-white rounded-2xl border border-slate-200 hover:border-blue-500 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
+                  className="bg-white rounded-2xl border border-slate-200 hover:border-[#2A2C5C]/40 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center group-hover:scale-105 transition-transform">
                     <Utensils className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">Canteens & Menus</h4>
+                    <h4 className="text-sm font-semibold text-slate-900">Canteens & Menus</h4>
                     <p className="text-xs text-slate-500 mt-0.5">
                       UNIQUE Canteen, SKY Cafe, crowd meter & quick order tokens
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-blue-600 flex items-center gap-1">
+                  <span className="text-xs font-semibold text-[#2A2C5C] flex items-center gap-1">
                     View Menus →
                   </span>
                 </div>
@@ -1138,18 +1138,18 @@ export default function App() {
                 {/* Workshops & Events */}
                 <div
                   onClick={() => setIsWorkshopOpen(true)}
-                  className="bg-white rounded-2xl border border-slate-200 hover:border-blue-500 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
+                  className="bg-white rounded-2xl border border-slate-200 hover:border-[#2A2C5C]/40 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-[#2A2C5C]/10 text-[#2A2C5C] flex items-center justify-center group-hover:scale-105 transition-transform">
                     <Calendar className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">Workshops & Events</h4>
+                    <h4 className="text-sm font-semibold text-slate-900">Workshops & Events</h4>
                     <p className="text-xs text-slate-500 mt-0.5">
                       Sports meet registration, coding bootcamps & art workshops
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-blue-600 flex items-center gap-1">
+                  <span className="text-xs font-semibold text-[#2A2C5C] flex items-center gap-1">
                     Register Events →
                   </span>
                 </div>
@@ -1157,18 +1157,18 @@ export default function App() {
                 {/* Help & Support */}
                 <div
                   onClick={() => setIsHelpOpen(true)}
-                  className="bg-white rounded-2xl border border-slate-200 hover:border-blue-500 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
+                  className="bg-white rounded-2xl border border-slate-200 hover:border-[#2A2C5C]/40 p-4 shadow-xs hover:shadow-md transition-all cursor-pointer space-y-3 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center group-hover:scale-105 transition-transform">
                     <LifeBuoy className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">Help Desk & SOS</h4>
+                    <h4 className="text-sm font-semibold text-slate-900">Help Desk & SOS</h4>
                     <p className="text-xs text-slate-500 mt-0.5">
                       Fresher induction checklist, 24/7 security & WiFi setup
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-blue-600 flex items-center gap-1">
+                  <span className="text-xs font-semibold text-[#2A2C5C] flex items-center gap-1">
                     Get Support →
                   </span>
                 </div>
@@ -1197,7 +1197,7 @@ export default function App() {
                 </div>
                 <button
                   onClick={() => setIsWorkshopOpen(true)}
-                  className="bg-blue-600 text-white px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition-colors shadow-xs"
+                  className="bg-[#2A2C5C] text-white px-3.5 py-2 rounded-xl text-xs font-semibold hover:bg-[#1E2045] transition-colors shadow-xs cursor-pointer"
                 >
                   Open Registration
                 </button>
@@ -1216,19 +1216,19 @@ export default function App() {
                         alt={evt.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
-                      <span className="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold uppercase px-2.5 py-1 rounded-md shadow-xs">
+                      <span className="absolute top-3 left-3 bg-[#2A2C5C] text-white text-[10px] font-semibold uppercase px-2.5 py-1 rounded-md shadow-xs">
                         {evt.category}
                       </span>
                     </div>
 
                     <div className="p-4 space-y-2">
-                      <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                      <h3 className="text-sm font-semibold text-slate-900 group-hover:text-[#2A2C5C] transition-colors">
                         {evt.title}
                       </h3>
                       <p className="text-xs text-slate-500 line-clamp-2">{evt.description}</p>
                       <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
                         <span className="font-medium">{evt.date}</span>
-                        <strong className="text-emerald-700 font-bold">{evt.fee}</strong>
+                        <strong className="text-emerald-700 font-semibold">{evt.fee}</strong>
                       </div>
                     </div>
                   </div>
@@ -1244,7 +1244,7 @@ export default function App() {
             <div className="p-4 sm:p-5 lg:p-6 space-y-5 pb-24 md:pb-6 animate-fade-in">
               <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-xs">
+                  <div className="w-12 h-12 rounded-xl bg-[#2A2C5C] text-white flex items-center justify-center font-bold text-lg shadow-xs">
                     UD
                   </div>
                   <div>
@@ -1256,7 +1256,7 @@ export default function App() {
                 </div>
                 <button
                   onClick={() => setIsProfileOpen(true)}
-                  className="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-100 transition-colors"
+                  className="bg-[#2A2C5C]/10 text-[#2A2C5C] border border-[#2A2C5C]/20 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-[#2A2C5C]/15 transition-colors cursor-pointer"
                 >
                   Digital Card View
                 </button>
@@ -1265,22 +1265,22 @@ export default function App() {
               {/* Quick Stats Grid */}
               <div className="grid grid-cols-3 gap-3 text-center text-xs">
                 <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
-                  <span className="text-[10px] text-slate-400 font-bold uppercase block">
+                  <span className="text-[10px] text-slate-400 font-semibold uppercase block">
                     Attendance
                   </span>
-                  <span className="text-base font-black text-emerald-600">{student.attendance}%</span>
+                  <span className="text-base font-bold text-emerald-700">{student.attendance}%</span>
                 </div>
                 <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
-                  <span className="text-[10px] text-slate-400 font-bold uppercase block">
+                  <span className="text-[10px] text-slate-400 font-semibold uppercase block">
                     Hostel Room
                   </span>
-                  <span className="text-base font-black text-slate-900">{student.hostelRoom}</span>
+                  <span className="text-base font-bold text-slate-900">{student.hostelRoom}</span>
                 </div>
                 <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
-                  <span className="text-[10px] text-slate-400 font-bold uppercase block">
+                  <span className="text-[10px] text-slate-400 font-semibold uppercase block">
                     Bus Pass
                   </span>
-                  <span className="text-base font-black text-blue-600">Active</span>
+                  <span className="text-base font-bold text-[#2A2C5C]">Active</span>
                 </div>
               </div>
 
@@ -1288,10 +1288,10 @@ export default function App() {
               <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs divide-y divide-slate-100 text-xs md:text-sm">
                 <button
                   onClick={() => setIsBusOpen(true)}
-                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
+                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <Bus className="w-4 h-4 text-blue-600" />
+                    <Bus className="w-4 h-4 text-[#2A2C5C]" />
                     <span className="font-semibold text-slate-800">
                       My Bus Pass & Transit Route
                     </span>
@@ -1300,10 +1300,10 @@ export default function App() {
                 </button>
                 <button
                   onClick={() => setIsHostelOpen(true)}
-                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
+                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <Bed className="w-4 h-4 text-indigo-600" />
+                    <Bed className="w-4 h-4 text-[#2A2C5C]" />
                     <span className="font-semibold text-slate-800">
                       Hostel Residency & Gate Pass
                     </span>
@@ -1312,10 +1312,10 @@ export default function App() {
                 </button>
                 <button
                   onClick={() => setIsLibraryOpen(true)}
-                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
+                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <BookOpen className="w-4 h-4 text-teal-600" />
+                    <BookOpen className="w-4 h-4 text-[#2A2C5C]" />
                     <span className="font-semibold text-slate-800">
                       Library Due Books & Borrowings
                     </span>
@@ -1324,10 +1324,10 @@ export default function App() {
                 </button>
                 <button
                   onClick={() => setIsHelpOpen(true)}
-                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors"
+                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <LifeBuoy className="w-4 h-4 text-emerald-600" />
+                    <LifeBuoy className="w-4 h-4 text-[#2A2C5C]" />
                     <span className="font-semibold text-slate-800">
                       Fresher Induction Checklist
                     </span>

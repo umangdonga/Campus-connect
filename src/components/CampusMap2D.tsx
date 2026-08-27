@@ -7,17 +7,6 @@ import {
   Layers,
   ZoomIn,
   ZoomOut,
-  Maximize2,
-  Compass,
-  Search,
-  CheckCircle2,
-  Clock,
-  Sparkles,
-  Volume2,
-  Flame,
-  Coffee,
-  BookOpen,
-  Bed,
   Footprints,
 } from 'lucide-react';
 
@@ -39,121 +28,122 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
   const [routeCalculated, setRouteCalculated] = useState<boolean>(false);
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col">
       {/* 2D Map Controls Top Header */}
-      <div className="p-4 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <div className="p-2 bg-[#134F73] text-white rounded-xl shadow-sm">
-            <Layers className="w-5 h-5" />
+      <div className="p-3.5 sm:p-4 bg-slate-50 border-b border-slate-200/80 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 bg-[#2A2C5C] text-white rounded-xl">
+            <Layers className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-[#134F73]">2D Interactive Campus Blueprint</h3>
-            <p className="text-xs text-slate-500">Floor plans, room numbers, accessibility paths & safety zones</p>
+            <h3 className="text-sm font-bold text-[#2A2C5C]">2D Interactive Blueprint</h3>
+            <p className="text-[11px] text-slate-500">Floor plans, rooms, walking paths & emergency zones</p>
           </div>
         </div>
 
-        {/* Floor selector */}
-        <div className="flex items-center gap-1.5 bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
-          <span className="text-xs font-semibold text-slate-400 px-2">Floor:</span>
-          {[1, 2, 3, 4].map((fl) => (
-            <button
-              key={fl}
-              onClick={() => setActiveFloorFilter(fl)}
-              className={`w-7 h-7 rounded-lg text-xs font-bold transition-all ${
-                activeFloorFilter === fl
-                  ? 'bg-[#134F73] text-white shadow-sm'
-                  : 'text-slate-600 hover:bg-slate-100'
-              }`}
-            >
-              L{fl}
-            </button>
-          ))}
-        </div>
+        {/* Floor selector & Zoom */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200">
+            <span className="text-[11px] font-medium text-slate-400 px-1.5">Floor:</span>
+            {[1, 2, 3, 4].map((fl) => (
+              <button
+                key={fl}
+                onClick={() => setActiveFloorFilter(fl)}
+                className={`w-6 h-6 rounded-lg text-xs font-semibold transition-all ${
+                  activeFloorFilter === fl
+                    ? 'bg-[#2A2C5C] text-white'
+                    : 'text-slate-600 hover:bg-slate-100'
+                }`}
+              >
+                L{fl}
+              </button>
+            ))}
+          </div>
 
-        {/* Zoom Controls */}
-        <div className="flex items-center gap-1">
-          <button
-            onClick={() => setZoomLevel((z) => Math.min(1.5, z + 0.15))}
-            className="p-2 bg-white rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors"
-            title="Zoom In"
-          >
-            <ZoomIn className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => setZoomLevel((z) => Math.max(0.75, z - 0.15))}
-            className="p-2 bg-white rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors"
-            title="Zoom Out"
-          >
-            <ZoomOut className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => setZoomLevel(1)}
-            className="p-2 bg-white rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors"
-          >
-            Reset
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => setZoomLevel((z) => Math.min(1.5, z + 0.15))}
+              className="p-1.5 bg-white rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors"
+              title="Zoom In"
+            >
+              <ZoomIn className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => setZoomLevel((z) => Math.max(0.75, z - 0.15))}
+              className="p-1.5 bg-white rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors"
+              title="Zoom Out"
+            >
+              <ZoomOut className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => setZoomLevel(1)}
+              className="px-2 py-1 bg-white rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors"
+            >
+              Reset
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Layer Filters */}
-      <div className="px-4 py-2 bg-slate-100/70 border-b border-slate-200 flex items-center gap-2 overflow-x-auto text-xs">
-        <span className="font-semibold text-slate-500">Show Layers:</span>
+      <div className="px-4 py-2 bg-slate-50/50 border-b border-slate-200/80 flex items-center gap-1.5 overflow-x-auto text-xs">
+        <span className="text-slate-400 font-medium text-[11px]">Layers:</span>
         <button
           onClick={() => setActiveLayer('all')}
-          className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
-            activeLayer === 'all' ? 'bg-[#134F73] text-white' : 'bg-white text-slate-700 border'
+          className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+            activeLayer === 'all' ? 'bg-[#2A2C5C] text-white' : 'bg-white text-slate-700 border border-slate-200'
           }`}
         >
           All Buildings
         </button>
         <button
           onClick={() => setActiveLayer('classrooms')}
-          className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
-            activeLayer === 'classrooms' ? 'bg-[#134F73] text-white' : 'bg-white text-slate-700 border'
+          className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+            activeLayer === 'classrooms' ? 'bg-[#2A2C5C] text-white' : 'bg-white text-slate-700 border border-slate-200'
           }`}
         >
           Classrooms & Labs
         </button>
         <button
           onClick={() => setActiveLayer('amenities')}
-          className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
-            activeLayer === 'amenities' ? 'bg-[#134F73] text-white' : 'bg-white text-slate-700 border'
+          className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+            activeLayer === 'amenities' ? 'bg-[#2A2C5C] text-white' : 'bg-white text-slate-700 border border-slate-200'
           }`}
         >
-          Water / Washroom / Lifts
+          Amenities & Restrooms
         </button>
         <button
           onClick={() => setActiveLayer('safety')}
-          className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
+          className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
             activeLayer === 'safety' ? 'bg-rose-600 text-white' : 'bg-white text-rose-700 border border-rose-200'
           }`}
         >
-          Emergency SOS / Fire Exits
+          Safety & Exits
         </button>
       </div>
 
       {/* SVG Canvas Map */}
-      <div className="relative w-full h-[450px] bg-slate-50 overflow-hidden flex items-center justify-center p-4">
+      <div className="relative w-full h-[380px] sm:h-[420px] bg-slate-50 overflow-hidden flex items-center justify-center p-3">
         <div
           className="transition-transform duration-200 ease-out origin-center w-full max-w-2xl"
           style={{ transform: `scale(${zoomLevel})` }}
         >
           <svg
             viewBox="0 0 800 500"
-            className="w-full h-full drop-shadow-md select-none rounded-xl"
+            className="w-full h-full drop-shadow-xs select-none rounded-xl"
             style={{ backgroundColor: '#F8FAFC' }}
           >
             {/* Campus Outline / Boundary */}
-            <rect x="20" y="20" width="760" height="460" rx="16" fill="#F1F5F9" stroke="#CBD5E1" strokeWidth="2" />
+            <rect x="20" y="20" width="760" height="460" rx="16" fill="#F1F5F9" stroke="#E2E8F0" strokeWidth="1.5" />
 
             {/* Lush Gardens / Lawns */}
-            <rect x="40" y="40" width="180" height="120" rx="12" fill="#DCFCE7" stroke="#86EFAC" strokeWidth="1.5" />
-            <text x="130" y="105" textAnchor="middle" fill="#15803D" fontSize="12" fontWeight="600">
+            <rect x="40" y="40" width="180" height="120" rx="12" fill="#ECFDF5" stroke="#A7F3D0" strokeWidth="1" />
+            <text x="130" y="105" textAnchor="middle" fill="#047857" fontSize="12" fontWeight="600">
               🌿 Central Green Lawn
             </text>
 
-            <rect x="580" y="40" width="180" height="120" rx="12" fill="#DCFCE7" stroke="#86EFAC" strokeWidth="1.5" />
-            <text x="670" y="105" textAnchor="middle" fill="#15803D" fontSize="12" fontWeight="600">
+            <rect x="580" y="40" width="180" height="120" rx="12" fill="#ECFDF5" stroke="#A7F3D0" strokeWidth="1" />
+            <text x="670" y="105" textAnchor="middle" fill="#047857" fontSize="12" fontWeight="600">
               🌳 Botanical Park
             </text>
 
@@ -161,21 +151,21 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
             <path
               d="M 400,30 L 400,470 M 30,250 L 770,250"
               stroke="#E2E8F0"
-              strokeWidth="28"
+              strokeWidth="24"
               strokeLinecap="round"
             />
             <path
               d="M 400,30 L 400,470 M 30,250 L 770,250"
               stroke="#CBD5E1"
-              strokeWidth="2"
+              strokeWidth="1.5"
               strokeDasharray="6 6"
             />
 
             {/* Campus Roundabout */}
-            <circle cx="400" cy="250" r="45" fill="#E2E8F0" stroke="#94A3B8" strokeWidth="2" />
-            <circle cx="400" cy="250" r="22" fill="#53AADF" stroke="#134F73" strokeWidth="2" />
-            <text x="400" y="254" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontWeight="bold">
-              FOUNTAIN
+            <circle cx="400" cy="250" r="40" fill="#E2E8F0" stroke="#CBD5E1" strokeWidth="1.5" />
+            <circle cx="400" cy="250" r="18" fill="#2A2C5C" />
+            <text x="400" y="254" textAnchor="middle" fill="#FFFFFF" fontSize="8" fontWeight="bold">
+              PLAZA
             </text>
 
             {/* Animated Path Route if calculated */}
@@ -183,8 +173,8 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
               <path
                 d="M 400,460 L 400,250 L 400,160"
                 stroke="#10B981"
-                strokeWidth="5"
-                strokeDasharray="8 6"
+                strokeWidth="4"
+                strokeDasharray="6 4"
                 strokeLinecap="round"
                 className="animate-pulse"
               />
@@ -205,14 +195,14 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
                 width="180"
                 height="110"
                 rx="10"
-                fill={selectedZone?.id === 'bld-tech-tower' ? '#134F73' : '#1E3A8A'}
-                stroke="#53AADF"
-                strokeWidth={selectedZone?.id === 'bld-tech-tower' ? '4' : '2'}
+                fill={selectedZone?.id === 'bld-tech-tower' ? '#2A2C5C' : '#3E427B'}
+                stroke="#2A2C5C"
+                strokeWidth={selectedZone?.id === 'bld-tech-tower' ? '3' : '1'}
               />
               <text x="400" y="90" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">
                 Tech Tower (TT)
               </text>
-              <text x="400" y="110" textAnchor="middle" fill="#93C5FD" fontSize="10">
+              <text x="400" y="110" textAnchor="middle" fill="#D5D8ED" fontSize="10">
                 CS & AI Labs • TT-101 • TT-201
               </text>
               <text x="400" y="130" textAnchor="middle" fill="#FEF08A" fontSize="9" fontWeight="bold">
@@ -235,14 +225,14 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
                 width="140"
                 height="100"
                 rx="10"
-                fill="#53AADF"
-                stroke="#134F73"
-                strokeWidth={selectedZone?.id === 'bld-amp' ? '4' : '2'}
+                fill="#4E5399"
+                stroke="#2A2C5C"
+                strokeWidth={selectedZone?.id === 'bld-amp' ? '3' : '1'}
               />
-              <text x="120" y="225" textAnchor="middle" fill="#134F73" fontSize="12" fontWeight="bold">
+              <text x="120" y="225" textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="bold">
                 Amphitheater (AMP)
               </text>
-              <text x="120" y="245" textAnchor="middle" fill="#075985" fontSize="10">
+              <text x="120" y="245" textAnchor="middle" fill="#E6E8F5" fontSize="10">
                 Acoustic Stage • 1500 Cap
               </text>
             </g>
@@ -264,13 +254,13 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
                 rx="10"
                 fill="#14B8A6"
                 stroke="#0F766E"
-                strokeWidth={selectedZone?.id === 'bld-library' ? '4' : '2'}
+                strokeWidth={selectedZone?.id === 'bld-library' ? '3' : '1'}
               />
               <text x="680" y="225" textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="bold">
                 Central Library (LIB)
               </text>
               <text x="680" y="245" textAnchor="middle" fill="#CCFBF1" fontSize="10">
-                Quiet Halls • 300K Books
+                Quiet Study • 300K Books
               </text>
             </g>
 
@@ -289,15 +279,15 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
                 width="150"
                 height="110"
                 rx="10"
-                fill="#263D88"
-                stroke="#60A5FA"
-                strokeWidth={selectedZone?.id === 'bld-admin' ? '4' : '2'}
+                fill="#2A2C5C"
+                stroke="#5A5E9E"
+                strokeWidth={selectedZone?.id === 'bld-admin' ? '3' : '1'}
               />
               <text x="125" y="365" textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="bold">
                 Admin Block (ADM)
               </text>
-              <text x="125" y="385" textAnchor="middle" fill="#93C5FD" fontSize="10">
-                Admissions • Fees • ID Card
+              <text x="125" y="385" textAnchor="middle" fill="#D5D8ED" fontSize="10">
+                Admissions • Student Desk
               </text>
             </g>
 
@@ -316,9 +306,9 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
                 width="160"
                 height="110"
                 rx="10"
-                fill="#F97316"
+                fill="#EA580C"
                 stroke="#C2410C"
-                strokeWidth={selectedZone?.id === 'bld-canteen-hub' ? '4' : '2'}
+                strokeWidth={selectedZone?.id === 'bld-canteen-hub' ? '3' : '1'}
               />
               <text x="680" y="365" textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="bold">
                 Food Court & Canteen
@@ -328,7 +318,7 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
               </text>
             </g>
 
-            {/* Building 6: Sports Complex & Gym (Center Bottom Left) */}
+            {/* Building 6: Sports Complex & Gym */}
             <g
               onClick={() => {
                 const b = CAMPUS_BUILDINGS.find((x) => x.id === 'bld-sports')!;
@@ -345,7 +335,7 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
                 rx="10"
                 fill="#0D9488"
                 stroke="#115E59"
-                strokeWidth={selectedZone?.id === 'bld-sports' ? '4' : '2'}
+                strokeWidth={selectedZone?.id === 'bld-sports' ? '3' : '1'}
               />
               <text x="300" y="375" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">
                 Sports Arena
@@ -355,7 +345,7 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
               </text>
             </g>
 
-            {/* Building 7: Bus Terminal (Center Bottom Right) */}
+            {/* Building 7: Bus Terminal */}
             <g
               onClick={() => {
                 const b = CAMPUS_BUILDINGS.find((x) => x.id === 'bld-bus-terminal')!;
@@ -370,23 +360,23 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
                 width="130"
                 height="90"
                 rx="10"
-                fill="#134F73"
-                stroke="#53AADF"
-                strokeWidth={selectedZone?.id === 'bld-bus-terminal' ? '4' : '2'}
+                fill="#373B75"
+                stroke="#2A2C5C"
+                strokeWidth={selectedZone?.id === 'bld-bus-terminal' ? '3' : '1'}
               />
               <text x="505" y="375" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">
                 Bus Terminus
               </text>
-              <text x="505" y="392" textAnchor="middle" fill="#BAE6FD" fontSize="9">
+              <text x="505" y="392" textAnchor="middle" fill="#E6E8F5" fontSize="9">
                 Routes 1-24 • Bays 1-6
               </text>
             </g>
 
             {/* Campus Main Gate Entrance Marker */}
             <g>
-              <rect x="340" y="460" width="120" height="25" rx="6" fill="#101214" />
+              <rect x="340" y="460" width="120" height="25" rx="6" fill="#1E293B" />
               <text x="400" y="477" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">
-                🚪 CAMPUS MAIN GATE 1
+                🚪 CAMPUS MAIN GATE
               </text>
             </g>
           </svg>
@@ -394,29 +384,29 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
       </div>
 
       {/* Path Routing Bar & Selected Detail */}
-      <div className="p-4 bg-slate-50 border-t border-slate-200">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
+      <div className="p-3.5 sm:p-4 bg-slate-50 border-t border-slate-200/80">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center">
           {/* Quick Route Generator */}
-          <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+          <div className="bg-white p-3 rounded-xl border border-slate-200">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold text-[#134F73] flex items-center gap-1.5">
-                <Footprints className="w-4 h-4 text-emerald-600" />
-                Quick Walking Route Planner
+              <span className="text-xs font-bold text-[#2A2C5C] flex items-center gap-1.5">
+                <Footprints className="w-3.5 h-3.5 text-emerald-600" />
+                Walking Route Planner
               </span>
               {routeCalculated && (
-                <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
-                  ~3 mins walking (220 meters)
+                <span className="text-[10px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  ~3 mins walking (220 m)
                 </span>
               )}
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-2">
               <div className="w-full">
-                <label className="text-[10px] uppercase font-semibold text-slate-400">From</label>
+                <label className="text-[9px] uppercase font-semibold text-slate-400">From</label>
                 <select
                   value={startPoint}
                   onChange={(e) => setStartPoint(e.target.value)}
-                  className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-lg p-2 text-slate-700 outline-none"
+                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-slate-700 outline-none"
                 >
                   <option value="Campus Main Gate">Campus Main Gate</option>
                   <option value="Hostel Block A">Hostel Block A</option>
@@ -426,11 +416,11 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
               </div>
 
               <div className="w-full">
-                <label className="text-[10px] uppercase font-semibold text-slate-400">To Destination</label>
+                <label className="text-[9px] uppercase font-semibold text-slate-400">Destination</label>
                 <select
                   value={endPoint}
                   onChange={(e) => setEndPoint(e.target.value)}
-                  className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-lg p-2 text-slate-700 outline-none"
+                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-slate-700 outline-none"
                 >
                   <option value="Tech Tower (TT-101)">Tech Tower (Alan Turing Hall)</option>
                   <option value="Central Library (Floor 2)">Central Library (Reading Pod)</option>
@@ -443,9 +433,9 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
               <div className="sm:self-end w-full sm:w-auto">
                 <button
                   onClick={() => setRouteCalculated(true)}
-                  className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition-all shadow-sm flex items-center justify-center gap-1"
+                  className="w-full sm:w-auto bg-[#2A2C5C] hover:bg-[#1E2045] text-white text-xs font-medium px-3.5 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1 shadow-xs"
                 >
-                  <Navigation className="w-3.5 h-3.5" />
+                  <Navigation className="w-3 h-3" />
                   <span>Route</span>
                 </button>
               </div>
@@ -454,14 +444,14 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
 
           {/* Selected Building Quick Rooms List */}
           {selectedZone && (
-            <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+            <div className="bg-white p-3 rounded-xl border border-slate-200">
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-2">
                   <span
-                    className="w-3 h-3 rounded-full"
+                    className="w-2.5 h-2.5 rounded-full"
                     style={{ backgroundColor: selectedZone.color }}
                   />
-                  <h4 className="text-xs font-bold text-[#134F73]">{selectedZone.name}</h4>
+                  <h4 className="text-xs font-bold text-[#2A2C5C]">{selectedZone.name}</h4>
                 </div>
                 <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">
                   {selectedZone.openingHours}
@@ -474,16 +464,16 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
                     <button
                       key={rm.id}
                       onClick={() => onNavigateToRoom?.(rm)}
-                      className="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 text-[#134F73] border border-sky-200 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                      className="px-2 py-1 bg-[#2A2C5C]/5 hover:bg-[#2A2C5C]/10 text-[#2A2C5C] border border-[#2A2C5C]/15 rounded-lg text-xs font-medium flex items-center gap-1 transition-colors"
                     >
-                      <MapPin className="w-3 h-3 text-[#53AADF]" />
+                      <MapPin className="w-3 h-3" />
                       <span>{rm.roomNumber}</span>
-                      <span className="text-[10px] font-normal text-slate-500">({rm.currentStatus})</span>
+                      <span className="text-[10px] text-slate-500">({rm.currentStatus})</span>
                     </button>
                   ))
                 ) : (
                   <p className="text-xs text-slate-500">
-                    Popular highlights: {selectedZone.popularSpots.join(', ')}
+                    Highlights: {selectedZone.popularSpots.join(', ')}
                   </p>
                 )}
               </div>
@@ -494,3 +484,4 @@ export const CampusMap2D: React.FC<CampusMap2DProps> = ({
     </div>
   );
 };
+
