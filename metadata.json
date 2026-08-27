@@ -1,6 +1,6 @@
 {
   "name": "Campus Connect",
-  "description": "Smart campus onboarding & companion with 3D/2D navigation, classroom finder, bus schedules & registration, canteen menus, library services, hostel, news, and workshop registration.",
+  "description": "Smart campus companion with Google ID authentication, 3D/2D navigation, classroom finder, bus schedules & registration, canteen menus, library services, hostel, news, and workshop registration.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

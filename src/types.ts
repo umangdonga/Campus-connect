@@ -155,12 +155,15 @@ export interface HostelRoom {
 }
 
 export interface StudentProfile {
+  userId?: string;
   name: string;
   rollNo: string;
   program: string;
   semester: string;
   department: string;
   email: string;
+  photoURL?: string;
+  isGoogleLinked?: boolean;
   hostelBlock?: string;
   hostelRoom?: string;
   busPassNumber?: string;

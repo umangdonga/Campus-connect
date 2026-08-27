@@ -8,6 +8,7 @@ import {
   NOTIFICATIONS_DATA,
 } from './data/campusData';
 import { TabType, MapMode, Building, Classroom, Canteen, CampusEvent, NewsItem } from './types';
+import { useAuth } from './context/AuthContext';
 import { SplashOnboarding } from './components/SplashOnboarding';
 import { CampusMap3D } from './components/CampusMap3D';
 import { CampusMap2D } from './components/CampusMap2D';
@@ -21,6 +22,7 @@ import { NewsModal } from './components/NewsModal';
 import { NotificationsModal } from './components/NotificationsModal';
 import { HelpSupportModal } from './components/HelpSupportModal';
 import { StudentProfileModal } from './components/StudentProfileModal';
+import { AuthModal } from './components/AuthModal';
 import { BottomNav } from './components/BottomNav';
 import {
   Bell,
@@ -47,14 +49,18 @@ import {
   CheckCircle2,
   X,
   Footprints,
+  LogIn,
+  User as UserIcon,
 } from 'lucide-react';
 
 export default function App() {
+  // Authentication & Cloud Sync
+  const { user, student, updateProfileData, signInWithGoogle, isAuthModalOpen, setIsAuthModalOpen } = useAuth();
+
   // State
   const [showSplash, setShowSplash] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<TabType>('home');
   const [mapMode, setMapMode] = useState<MapMode>('3d');
-  const [student, setStudent] = useState(INITIAL_STUDENT);
   const [isPhoneFrame, setIsPhoneFrame] = useState<boolean>(false);
 
   // Global Search State
@@ -242,15 +248,23 @@ export default function App() {
 
           {/* Student Profile Avatar at Bottom */}
           <div
-            onClick={() => setIsProfileOpen(true)}
+            onClick={() => setIsAuthModalOpen(true)}
             className="mt-auto pb-4 cursor-pointer group flex flex-col items-center gap-1"
-            title="Student Profile & ID"
+            title="Google SSO & Student Profile"
           >
-            <div className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white text-xs font-semibold transition-colors">
-              UD
-            </div>
+            {user?.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt={student.name}
+                className="w-9 h-9 rounded-full object-cover border-2 border-emerald-400 shadow-xs hover:scale-105 transition-transform"
+              />
+            ) : (
+              <div className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white text-xs font-semibold transition-colors">
+                {student.name.slice(0, 2).toUpperCase()}
+              </div>
+            )}
             <span className="text-[9px] font-medium text-slate-400 group-hover:text-slate-200">
-              Profile
+              {user ? 'Google SSO' : 'Profile'}
             </span>
           </div>
         </nav>
@@ -425,14 +439,65 @@ export default function App() {
           </div>
 
           {/* Right Status Indicators & Action Buttons */}
-          <div className="flex items-center gap-3 sm:gap-4 text-sm font-medium">
+          <div className="flex items-center gap-2 sm:gap-3 text-sm font-medium">
+            {/* Google Authentication Button */}
+            {user ? (
+              <button
+                onClick={() => setIsAuthModalOpen(true)}
+                className="flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-semibold text-slate-800 transition-all cursor-pointer shadow-xs shrink-0"
+                title="Google SSO Account details"
+              >
+                {user.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt={user.displayName || 'Google User'}
+                    className="w-6 h-6 rounded-full object-cover border border-[#2A2C5C]/30"
+                  />
+                ) : (
+                  <div className="w-6 h-6 rounded-full bg-[#2A2C5C] text-white text-[10px] flex items-center justify-center font-bold">
+                    {student.name.charAt(0)}
+                  </div>
+                )}
+                <span className="hidden md:inline max-w-[110px] truncate text-[11px]">
+                  {user.displayName || student.name}
+                </span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white" />
+              </button>
+            ) : (
+              <button
+                onClick={() => setIsAuthModalOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-xs font-semibold text-slate-700 hover:text-[#2A2C5C] transition-all cursor-pointer shadow-xs shrink-0"
+                title="Authenticate with Google ID"
+              >
+                <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                  />
+                </svg>
+                <span className="hidden sm:inline">Google ID</span>
+              </button>
+            )}
+
             {/* Campus Status Indicator */}
             <div className="hidden lg:flex flex-col items-end">
               <span className="text-slate-400 text-[10px] uppercase tracking-wider font-semibold">
                 Campus Status
               </span>
               <span className="text-emerald-700 flex items-center gap-1 font-semibold text-xs">
-                ● Normal Operations
+                ● Normal
               </span>
             </div>
 
@@ -474,14 +539,6 @@ export default function App() {
                   <span className="hidden xl:inline">Mobile Frame</span>
                 </>
               )}
-            </button>
-
-            {/* Splash Tour button */}
-            <button
-              onClick={() => setShowSplash(true)}
-              className="text-xs font-medium text-[#2A2C5C] hover:text-[#1E2045] px-2.5 py-1.5 rounded-xl bg-[#2A2C5C]/5 hover:bg-[#2A2C5C]/10 transition-colors hidden sm:inline"
-            >
-              Tour
             </button>
           </div>
         </header>
@@ -1242,24 +1299,55 @@ export default function App() {
           {/* ========================================================================= */}
           {activeTab === 'profile' && (
             <div className="p-4 sm:p-5 lg:p-6 space-y-5 pb-24 md:pb-6 animate-fade-in">
-              <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-[#2A2C5C] text-white flex items-center justify-center font-bold text-lg shadow-xs">
-                    UD
-                  </div>
+              {/* Profile Card Header */}
+              <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-3.5">
+                  {user?.photoURL ? (
+                    <img
+                      src={user.photoURL}
+                      alt={student.name}
+                      className="w-14 h-14 rounded-2xl object-cover border-2 border-[#2A2C5C]/20 shadow-xs"
+                    />
+                  ) : (
+                    <div className="w-14 h-14 rounded-2xl bg-[#2A2C5C] text-white flex items-center justify-center font-bold text-lg shadow-xs">
+                      {student.name.slice(0, 2).toUpperCase()}
+                    </div>
+                  )}
                   <div>
-                    <h3 className="text-base font-bold text-slate-900">{student.name}</h3>
-                    <p className="text-xs text-slate-500">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-base font-bold text-slate-900">{student.name}</h3>
+                      {user ? (
+                        <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Google SSO
+                        </span>
+                      ) : (
+                        <span className="bg-slate-100 text-slate-600 border border-slate-200 text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                          Offline / Guest
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-500 mt-0.5">
                       {student.program} • {student.rollNo}
                     </p>
+                    <p className="text-[11px] text-slate-400 font-mono mt-0.5">{student.email}</p>
                   </div>
                 </div>
-                <button
-                  onClick={() => setIsProfileOpen(true)}
-                  className="bg-[#2A2C5C]/10 text-[#2A2C5C] border border-[#2A2C5C]/20 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-[#2A2C5C]/15 transition-colors cursor-pointer"
-                >
-                  Digital Card View
-                </button>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setIsAuthModalOpen(true)}
+                    className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 px-3 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-xs flex items-center gap-1.5"
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#2A2C5C]" />
+                    {user ? 'Manage Google ID' : 'Sign in with Google'}
+                  </button>
+                  <button
+                    onClick={() => setIsProfileOpen(true)}
+                    className="bg-[#2A2C5C] text-white px-3 py-2 rounded-xl text-xs font-semibold hover:bg-[#1E2045] transition-colors cursor-pointer shadow-xs"
+                  >
+                    Digital RFID Card
+                  </button>
+                </div>
               </div>
 
               {/* Quick Stats Grid */}
@@ -1274,18 +1362,56 @@ export default function App() {
                   <span className="text-[10px] text-slate-400 font-semibold uppercase block">
                     Hostel Room
                   </span>
-                  <span className="text-base font-bold text-slate-900">{student.hostelRoom}</span>
+                  <span className="text-base font-bold text-slate-900">{student.hostelRoom || '304-B'}</span>
                 </div>
                 <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
                   <span className="text-[10px] text-slate-400 font-semibold uppercase block">
                     Bus Pass
                   </span>
-                  <span className="text-base font-bold text-[#2A2C5C]">Active</span>
+                  <span className="text-base font-bold text-[#2A2C5C]">
+                    {student.busPassNumber ? 'Active' : 'Not Issued'}
+                  </span>
                 </div>
               </div>
 
               {/* Profile Action List */}
               <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs divide-y divide-slate-100 text-xs md:text-sm">
+                <button
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-1 rounded-md bg-slate-100 border border-slate-200">
+                      <svg className="w-4 h-4" viewBox="0 0 24 24">
+                        <path
+                          fill="#4285F4"
+                          d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                        />
+                        <path
+                          fill="#34A853"
+                          d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                        />
+                        <path
+                          fill="#FBBC05"
+                          d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                        />
+                        <path
+                          fill="#EA4335"
+                          d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-slate-800 block">
+                        Google Single Sign-On (SSO)
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        {user ? `Linked to ${user.email}` : 'Connect your University Google Account'}
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                </button>
                 <button
                   onClick={() => setIsBusOpen(true)}
                   className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer"
@@ -1366,7 +1492,7 @@ export default function App() {
         isOpen={isBusOpen}
         onClose={() => setIsBusOpen(false)}
         onRegisteredPass={(newPass) => {
-          setStudent((s) => ({ ...s, busPassNumber: newPass }));
+          updateProfileData({ busPassNumber: newPass });
         }}
       />
 
@@ -1426,6 +1552,15 @@ export default function App() {
           setIsProfileOpen(false);
           setIsLibraryOpen(true);
         }}
+        onOpenAuth={() => {
+          setIsProfileOpen(false);
+          setIsAuthModalOpen(true);
+        }}
+      />
+
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
       />
     </div>
   );

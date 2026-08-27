@@ -1,0 +1,31 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and student information linked to Google ID",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Google Auth UID" },
+        "name": { "type": "string", "description": "Display name from Google Account" },
+        "email": { "type": "string", "description": "Email from Google Account" },
+        "photoURL": { "type": "string", "description": "Avatar URL from Google Account" },
+        "rollNo": { "type": "string", "description": "Student University Roll Number" },
+        "program": { "type": "string", "description": "Academic Program" },
+        "department": { "type": "string", "description": "Academic Department" },
+        "hostelBlock": { "type": "string", "description": "Allotted Hostel Block" },
+        "hostelRoom": { "type": "string", "description": "Hostel Room Number" },
+        "busPassNumber": { "type": "string", "description": "Transport Bus Pass ID" },
+        "attendance": { "type": "number", "description": "Current Semester Attendance %" },
+        "libraryCardId": { "type": "string", "description": "Library Card Identifier" },
+        "updatedAt": { "type": "string", "description": "Last updated timestamp" }
+      },
+      "required": ["userId", "name", "email"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "entity": "UserProfile",
+      "description": "Individual student profile accessible by the authenticated owner"
+    }
+  }
+}
